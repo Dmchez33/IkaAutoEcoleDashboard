@@ -1,0 +1,20 @@
+
+
+.sidBar{
+    background-color:#1A237E !important;
+}
+.nav-item{
+    width: 100% !important;
+    margin-top: 2px;
+    background: rgba(217, 217, 217, 0.8) !important;
+    
+}
+
+.nav-link{
+    color: white !important;
+}
+.bg-dark{
+    width: 100% !important;
+    
+}
+.active { background-color: #6200EE !important; }

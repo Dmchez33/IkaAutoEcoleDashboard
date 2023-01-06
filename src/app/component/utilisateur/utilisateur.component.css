@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+.modal-content{
+    border-radius: 0px !important;
+    box-shadow: 2px 2px 2px blue;
+}
+.modal-footer{
+    border: none !important;
+}
