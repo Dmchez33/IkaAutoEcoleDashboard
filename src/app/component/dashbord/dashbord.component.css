@@ -1,0 +1,78 @@
+.map-container{
+  height: 100%;
+}
+
+  
+ 
+  
+  .border-primary{
+    border-color: rgba(0, 0, 0, .15) !important;
+  }
+  .text-primary{
+    color: #1A237E !important;
+  }
+  .shadow{
+    box-shadow: 4px 4px 1px  rgba(0,0,0,.4) !important;
+  }
+  
+  .my-card {
+    position: absolute;
+    left: 40%;
+    top: -20px;
+    border-radius: 50%;
+  }
+  .card1{
+    border-radius: 20px !important;
+  }
+  h1{
+    font-size: 80px;
+    font-weight: bolder;
+    text-shadow: 5px 5px 2px rgb(205, 215, 255);
+  }
+  /* .inputCherche{
+    padding: 2px;
+    border-width: 1px;
+  }
+  .inputCherche:focus{
+    padding: 2px;
+    outline: none;
+  }
+  .inputChercheButton{
+  
+    padding: 2px;
+    border-radius: 0px 5px 5px 0px;
+    border-width: 1px;
+    border-color: grey;
+    width: 3em;
+  
+  }
+  .button1 {
+    background-color: #FFFFFF;
+    border: 0px;
+    box-shadow: 2px 2px 2px darkgray inset;
+  }
+  .button1:active {
+    background-color: #FFFFFF;
+    border: 0px;
+    box-shadow: 2px 2px 2px darkgray;
+  }
+  .button {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    border: 0px;
+    font-weight: lighter;
+    cursor: pointer;
+  }
+  
+  .button:active {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    border: 0px;
+    box-shadow: 1px 1px 1px darkgray inset;
+  } */
+  
+  
+
+
+  /*STYLE CONCERNANT LES GRAPHES */
+  

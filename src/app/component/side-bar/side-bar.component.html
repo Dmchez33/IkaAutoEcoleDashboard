@@ -1,0 +1,115 @@
+<!-- <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto  col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
+                 <div href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <img src="../assets/image/logoIkaAutoEcole.png" class="logo" alt="logo de l'application">
+                </div> 
+                <ul class="nav  bg-dark nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                    id="menu">
+
+                    <li class="nav-item px-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <a routerLink="dashboard" class="nav-link px-0 align-middle">
+                            <img src="../assets/Icon/dashboar.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-1" routerLinkActive="active">
+                        <a routerLink="utilisateur" class="nav-link px-0 align-middle">
+                            <img src="../assets/Icon/user.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">Utilisateur</span></a>
+                    </li>
+                    <li class="nav-item px-1" routerLinkActive="active">
+                        <a routerLink="auto-ecole" class="nav-link px-0 align-middle ">
+                            <img src="../assets/Icon/autoecole.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">AutoEcole</span></a>
+                    </li>
+                    <li class="nav-item px-1" routerLinkActive="active">
+                        <a routerLink="vehicule" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <img src="../assets/Icon/vehicules.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">Véhicule</span> </a>
+                    </li>
+                    <li class="nav-item px-1" routerLinkActive="active">
+                        <a routerLink="quiz" class="nav-link px-0 align-middle">
+                            <img src="../assets/Icon/quizzing_.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">Quiz</span> </a>
+                    </li>
+                    <li class="nav-item px-1" routerLinkActive="active">
+                        <a routerLink="cours" class="nav-link px-0 align-middle">
+                            <img src="../assets/Icon/Book.png" width="25" alt="AutoEcole"> &nbsp; <span
+                                class="ms-1 d-none d-sm-inline">Cours</span> </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="pb-4">
+                    
+                    <a href="#" class="d-flex mt-3 align-items-center text-white text-decoration-none">
+                        <span class="d-none d-sm-inline mx-1">Copyright &copy; 2023</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-auto main col-md-9 col-xl-10">
+            
+                 <router-outlet></router-outlet> 
+                
+            
+        </div>
+    </div>
+</div> -->
+
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav sidebar" mode="side" opened>
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
+            <div href="/" class="mb-5 position-relative" style="width: 100%; height: 60px;">
+                <div class="position-absolute top-0 start-50 translate-middle-x">
+                    <img src="../assets/logo/logo.png" width="100%" class="logo" alt="logo de l'application">
+                </div>
+                
+            </div>
+            <ul class="nav   bg-dark1 nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                id="menu">
+
+                <li class="nav-item px-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="dashboard" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/dashboardblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../../../assets/Icon/dashboar.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="utilisateur" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/userblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/user.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Utilisateur</span></a>
+                </li>
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="auto-ecole" class="nav-link px-0 align-middle ">
+                        <img src="../../../assets/Icon/autoecoleblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/autoecole.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">AutoEcole</span></a>
+                </li>
+                
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="quiz" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/quizblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/quizzing_.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Quiz</span> </a>
+                </li>
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="cours" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/coursblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/Book.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Cours</span> </a>
+                </li>
+            </ul>
+            <div class="pb-4">
+
+                <a href="#" class="d-flex mt-3 align-items-center text-white text-decoration-none">
+                    <span class="d-none d-sm-inline mx-1">Copyright &copy; 2023</span>
+                </a>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>

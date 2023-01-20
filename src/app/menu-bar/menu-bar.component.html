@@ -1,0 +1,48 @@
+<div class="menu  w-100 sticky-top">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">
+    
+          Bootstrap
+        </a> -->
+      <h1 class="navbar-brand">{{ this.title }}</h1>
+
+      <div class="ms-auto">
+        <div class="row">
+          <div class="col position-relative">
+
+            <button type="button"
+              class="btn  position-relative position-absolute top-50 start-0 translate-middle badge rounded-pill">
+              <i class="bi bi-bell" style="color: black;"></i>
+              <span class="position-absolute top-50 start-75 translate-middle badge rounded-pill bg-danger">
+                99+
+
+              </span>
+            </button>
+          </div>
+          <div class="col">
+            <div class="btn-group dropstart">
+              <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../assets/image/login_image.gif" alt="hugenerd" width="30" height="30"
+                  class=" border border-black rounded-circle">
+                <span class="d-none d-sm-inline mx-1">{{username}}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                  <!-- <hr class="dropdown-divider"> -->
+                </li>
+                <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </nav>
+</div>

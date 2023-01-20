@@ -1,1 +1,243 @@
-<p>cours works!</p>
+<app-menu-bar [title]="title1"></app-menu-bar>
+
+<div class="container">
+    <div class="d-flex flex-row-reverse">
+        <ul class=" bg-white border border-2 nav nav-pills mt-3 mb-2 d-flex justify-content-end" id="pills-tab"
+            role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active text-center" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#Apprenants" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">Cours ouverts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-center" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#Pautoecole" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Cours d'auto-école</button>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade show active" id="Apprenants" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
+
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button class="btn btn-outline-primary mb-2" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="d-flex flex-row-reverse">
+
+                        <div class="mb-3">
+                            <input type="search" [(ngModel)]="recherche" class="form-control" id="rechercheinput"
+                                placeholder="Recherche">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mat-elevation-z">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Thème</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr *ngFor="let data of cours |filter:recherche">
+                                    <th scope="row"> {{data.theme}} </th>
+                                    <td> {{data.titre}} </td>
+                                    <td> {{data.description}} </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <span class="btn" routerLink="detail-utilisateur">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </span>
+
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <span class="btn">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4">
+                                                <span class="btn" data-bs-toggle="modal" data-bs-target="#supprimer">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent1 = $event">
+                        </mat-paginator>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="tab-pane fade show" id="Pautoecole" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+
+            <div class="mat-elevation-z">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Enregistrement</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+
+                <!--DEBUT FORMULAIRE-->
+
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="titre" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="titre" required>
+                        <div class="valid-feedback">
+                            Titre est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
+                        <div class="valid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Description</label>
+                        <textarea class="form-control" id="email" required></textarea>
+                        <div class="valid-feedback">
+                            Description est requis!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Vocal</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
+                        <div class="valid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Thème Cours</label>
+                            <div class="col-md-4">
+                                
+                                <select class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Selectionner un cours</option>
+                                    <option>Règles générales</option>
+                                    <option value="">Définitions </option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Veillez selectionner un thème
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btnadd" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                                    <i class="bi add bi-plus-circle-fill"></i>
+                                </button>
+                            </div>
+                        
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit">Enregistrer</button>
+                    </div>
+                </form>
+
+                <!--FIN FORMULLAIRE-->
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open
+                    second
+                    modal</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Hide this modal and show the first with the button below.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
+                    first</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal SUPPRESSION -->
+<div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+                Êtes vous sur de vouloi supprimer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                <button type="button" class="btn btn-primary">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>

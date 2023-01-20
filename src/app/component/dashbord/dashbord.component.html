@@ -1,16 +1,77 @@
-<div class="row">
-    <div class="col-6">
-        <!-- <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType"
+<!--Menu -->
+
+<app-menu-bar [title]="title" ></app-menu-bar>
+
+<!--Fin Menu-->
+
+<!--DEBUT STATISTIQUE SOUS FORME DE CARD-->
+<div class="jumbotron mt-3">
+  <div class="row w-100">
+
+    <div class="col m-2">
+      <div class="card card1 shadow border-primary mx-sm-1 p-3 border border-5" style="height: 100% ;">
+        <div class="card border-primary  text-danger p-3 my-card"><img src="../../../assets/Icon/vehicules.png" height="20"
+                                                                       alt="image montrant le nombre total de liste">
+        </div>
+        <div class="text-primary text-center mt-5">
+          <h4>Nombre d'auto-ecoles</h4>
+        </div>
+        <div class="text-primary text-center mt-2">
+          <h1>78</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col m-2">
+      <div class="card card1 shadow border-primary border border-5 mx-sm-1 p-3" style="height: 100% ;">
+        <div class="card border-primary shadow text-warning p-3 my-card"><img src="../../../assets/Icon/vehicules.png"
+                                                                              height="20"
+                                                                              alt="image montrant le nombre de liste tiré"
+                                                                              srcset=""></div>
+        <div class="text-primary text-center mt-5">
+          <h4>Nombre d'utilisateurs</h4>
+        </div>
+        <div class="text-primary text-center mt-2">
+          <h1>55</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col m-2">
+      <div class="card card1 shadow border-primary mx-sm-1 p-3 border border-5" style="height: 100% ;">
+        <div class="card border-primary  text-primary p-3 my-card"><img src="../../../assets/Icon/vehicules.png"
+                                                                        height="20"
+                                                                        alt="image montrant le nombre total de liste">
+        </div>
+        <div class="text-primary text-center mt-5">
+          <h4>Nombre de quiz</h4>
+        </div>
+        <div class="text-primary text-center mt-2">
+          <h1>23</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row w-100">
+  <div class="col-12">
+    <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+    [type]="barChartType">
+  </canvas>
+  </div>
+  <div class="col-5">
+    <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins">
         </canvas>
-        <br> -->
-        <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions"
-            [plugins]="barChartPlugins" [type]="barChartType">
-        </canvas>
+        <br>
+    
 
-        <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+    <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+  </div>
+  <div class="col-7">
+    <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
+      (leafletClick)="mapClicked($event)">
     </div>
-    <div class="col-6">
-        
-    </div>
+  </div>
 </div>
+
+

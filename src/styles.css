@@ -1,4 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+@import "leaflet/dist/leaflet.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  margin: 0;
+
+}
+
+/*STYLE APPLIQUER AU SIDEBAR DE ANGULAR MATERIAL*/
+.mat-drawer-inner-container {
+
+  overflow: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/*STYLE APPLIQUER AU MODAL */
+.modal-backdrop {
+  --bs-backdrop-zindex: 0;
+  --bs-backdrop-bg: #000;
+  --bs-backdrop-opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--bs-backdrop-zindex);
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bs-backdrop-bg);
+}
+
+/*STYLE APPLIQUER AU BOUTTON RECHERCHE*/
+
+#rechercheinput {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.25);
+}
+
+/*STYLE APPLIQUER AU BUTTON DE RETOUR*/
+.btnretour{
+  border-color: #1A237E !important;
+  color: #1A237E !important;
+  height: 30px !important;
+}
+
+.btnretour:hover{
+  background-color: #1A237E !important;
+  color: white !important;
+}
+.iconBack{
+  font-size: larger;
+  font-weight: bold;
+  position: relative;
+  bottom: 5px;
+}
+
+/*STYLE APPLIQUER AU DIFFERENT BUTTON DE SUPPRESSION MODIFICATION ET VOIR PLUS*/
+.bi-eye-fill{
+  color: #6200EE;
+}
+.bi-pencil-square-fill{
+  color: #1A237E;
+}
+
+.bi-trash-fill{
+  color: red;
+}
+/*STYLE APPLIQUER AU BOUTTON SECOND MODAL DANS UN MODAL*/
+
+.btnadd{
+  border-color: #1A237E !important;
+  color: #1A237E !important;
+  height: 30px !important;
+}
+
+.btnadd:hover{
+  background-color: #1A237E !important;
+  color: white !important;
+}
+.add{
+  font-size: larger;
+  font-weight: bold;
+  position: relative;
+  bottom: 5px;
+}
