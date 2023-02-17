@@ -1,3 +1,9 @@
+.imageQuiz{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 /* STYLE LIEU AU TABLEAU */
 table {
     width: 100%;
@@ -19,22 +25,21 @@ th {
     box-shadow: 4px 4px 1px rgba(0, 0, 0, 0.25);
 }
 
-.nav-link.active {
+.nav-link.active{
     background-color: rgba(26, 35, 126, 1) !important;
     border-radius: 0px !important;
 }
 
-.btn-outline-primary {
+.btn-outline-primary{
     border-color: #1A237E !important;
     color: #1A237E !important;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:hover{
     background-color: #1A237E !important;
     color: white !important;
 }
-
-.bi {
+.bi{
     font-size: larger;
 }
 
@@ -52,22 +57,15 @@ th {
     border: none !important;
 }
 
-.bi-backspace-fill {
+.bi-backspace-fill{
     font-size: x-large;
     color: #1A237E;
     cursor: pointer;
 }
 
 input,
-textarea {
-    border: rgb(0, 0, 0) 1px solid;
-    border-radius: 0px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+textarea,select {
+  border: rgb(0, 0, 0) 1px solid;
+  border-radius: 0px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0,0.25);
 }
-
-/* #rechercheinput {
-
-    border: rgb(0, 0, 0) 1px solid;
-    border-radius: 0px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
-} */

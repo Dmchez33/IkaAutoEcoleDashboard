@@ -16,19 +16,28 @@
   <div class="col-md-10">
     <div class="card" >
       <h4 class="card-title">
-        Thème: &nbsp;  {{detailCours.cours.libelle}}
+        Thème: &nbsp;  {{detailPanneaux.typePanneaux.titre}}
       
       </h4>
-        <img src={{detailCours.image}} class="card-img-top" alt="...">
+        <img src={{detailPanneaux.image}} class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-sub-title">
-            Titre: &nbsp;  {{detailCours.titre}}
+            Titre: &nbsp;  {{detailPanneaux.nom}}
           </h5>
           <h6 class="card-sub-title">
             Description: 
           </h6>
           <p class="card-text">
-            {{detailCours.description}}
+            {{detailPanneaux.description}}
+          </p>
+          <h6 class="card-sub-title">
+            Audio: 
+          </h6>
+          <p class="card-text">
+            <audio controls autoplay muted>
+                <source src={{detailPanneaux.vocal}} type="audio/mpeg">
+              Your browser does not support the audio element.
+              </audio>
           </p>
         </div>
       </div>

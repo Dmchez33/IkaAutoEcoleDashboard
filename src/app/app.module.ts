@@ -26,8 +26,29 @@ import { UtilisateurRoutingModule } from './component/utilisateur/utilisateur-ro
 import { SideBarComponent } from './component/side-bar/side-bar.component';
 import { SiedBarRoutingModule } from './component/side-bar/side-bar-routing.module';
 import { DetailCoursComponent } from './component/detail-cours/detail-cours.component';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HttpInterceptor } from '@angular/common/http';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {
+  AvatarModule,
+  BadgeModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  DropdownModule,
+  FormModule,
+  GridModule,
+  HeaderModule,
+  NavModule,
+  ProgressModule,
+  TableModule,
+  TabsModule
+} from '@coreui/angular';
+import { QuestionComponent } from './component/question/question.component';
+import { AuthIntercept } from './httpIntercept/auth.intercept';
+import { DetailPanneauxComponent } from './component/detail-panneaux/detail-panneaux.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
     DetailUtilisateurComponent,
     SideBarComponent,
     DetailCoursComponent,
+    QuestionComponent,
+    DetailPanneauxComponent,
     
   ],
   imports: [
@@ -60,10 +83,26 @@ import { HttpClientModule } from '@angular/common/http';
     Ng2SearchPipeModule,
     UtilisateurRoutingModule,
     SiedBarRoutingModule,
-    HttpClientModule
-    
-  ],
-  providers: [ { provide: MatPaginatorIntl, useClass: paginationPersonnalise}],
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    AvatarModule,
+    BadgeModule,
+    ButtonGroupModule,
+    ButtonModule,
+    CardModule,
+    FormModule,
+    GridModule,
+    NavModule,
+    ProgressModule,
+    TableModule,
+    TabsModule,
+    DropdownModule,
+    HeaderModule,
+  ], 
+  providers: [ { provide: MatPaginatorIntl, useClass: paginationPersonnalise}, AuthIntercept],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,76 +1,84 @@
-
-
-.sidBar{
-    background-color:#1A237E !important;
+.sidBar {
+  background-color: hsl(235, 66%, 30%) !important;
 }
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    background-color: #1A237E;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background-color: #1A237E;
   border-right: 1px solid #ccc;
-  }
+}
+
+.main {
+  margin-left: 225px;
+}
+
+@media (max-width: 768px) {
+
   .main {
-    margin-left: 225px;
+    margin-left: 40px;
   }
-  
-  @media (max-width: 768px) {
-    
-    .main {
-        margin-left: 40px;
-      }
-  }
-.nav-item{
-    width: 100% !important;
-    margin-top: 2px;
-    background: rgba(217, 217, 217, 0.5) !important;
-    
-    
+}
+
+.nav-item {
+  width: 100% !important;
+  margin-top: 2px;
+  background: rgba(217, 217, 217, 0.5) !important;
+
+
 }
 
 
-.nav-link{
-    color: white !important;
+.nav-link {
+  color: white !important;
 }
-.bg-dark1{
-    width: 100% !important;
-    
+
+.bg-dark1 {
+  width: 100% !important;
+
 }
-.active .nav-link{ 
-    color: #000000 !important;
+
+.active .nav-link {
+  color: #000000 !important;
 }
-.imageActive{
-    display: none;
+
+.imageActive {
+  display: none;
 }
-.active .imageActive{ 
-    display: inline;
+
+.active .imageActive {
+  display: inline;
 }
-.active .imageNonActive{
-    display: none;
+
+.active .imageNonActive {
+  display: none;
 }
-.imageNonActive{
-    display: inline;
+
+.imageNonActive {
+  display: inline;
 }
-.active{ 
-    background-color: #ffffff !important;
+
+.active {
+  background-color: #ffffff !important;
 }
 
 
 
 .example-container {
-  
+
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  
+
 }
 
 .example-sidenav {
   width: 15%;
-  
+
 }
 
 @media screen and (max-width: 500px) {
+
   /* styles pour une taille d'écran de 800px ou moins */
   .example-sidenav {
     width: auto;
@@ -78,3 +86,77 @@
 }
 
 
+/*-------------------------------------------------------------------*/
+/* mat-toolbar {
+  background: #004a9f;
+  color: white;
+}
+
+mat-sidenav {
+  margin: 16px;
+  width: 200px;
+  border-right: none;
+  background: #002b5c;
+  color: white;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.content {
+  height: calc(100vh - 130px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 32px;
+
+  padding: 16px; 
+
+  overflow: auto;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  
+}
+mat-icon {
+  margin-right: 8px;
+}
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+}
+
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+} */
+
+/*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */

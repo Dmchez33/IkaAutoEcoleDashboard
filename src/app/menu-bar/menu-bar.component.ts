@@ -12,12 +12,19 @@ import { Injectable } from '@angular/core';
 export class MenuBarComponent implements OnInit {
   @Input()
   title:any ;
+  @Input() sidebarId: boolean = true;
+  
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  drawer: any;
+  static showSidebar: any = true;
 
+  
+
+  
   constructor(private tokenStorageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -44,5 +51,8 @@ export class MenuBarComponent implements OnInit {
   //   this.title = title;
   //   console.log(this.title);
   // }
-
+  toggleSidebar() {
+    MenuBarComponent.showSidebar = !MenuBarComponent.showSidebar;
+    console.log(MenuBarComponent.showSidebar);
+  }
 }

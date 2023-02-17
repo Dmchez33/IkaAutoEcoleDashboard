@@ -56,10 +56,11 @@
             
         </div>
     </div>
-</div> -->
+</div>  -->
 
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav sidebar" mode="side" opened>
+ <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav sidebar" mode="side" opened *ngIf="sidebar">
+        
         <div class="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
             <div href="/" class="mb-5 position-relative" style="width: 100%; height: 60px;">
                 <div class="position-absolute top-0 start-50 translate-middle-x">
@@ -111,5 +112,80 @@
             </div>
         </div>
     </mat-drawer>
-    <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
-</mat-drawer-container>
+    <mat-drawer-content>
+        
+        <router-outlet></router-outlet>
+
+    </mat-drawer-content>
+</mat-drawer-container> 
+
+
+
+<!-- <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" opened="true" class="mat-elevation-z8">
+        <img class="avatar mat-elevation-z8" src="../assets/image/Logo.png" />
+
+        <h4 class="name">John Smith</h4>
+        <p class="designation">Software Engineer</p>
+
+        <mat-divider></mat-divider>
+
+        <ul class="nav   bg-dark1 nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                id="menu">
+
+                <li class="nav-item px-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                    <a routerLink="dashboard" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/dashboardblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../../../assets/Icon/dashboar.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="utilisateur" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/userblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/user.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Utilisateur</span></a>
+                </li>
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="auto-ecole" class="nav-link px-0 align-middle ">
+                        <img src="../../../assets/Icon/autoecoleblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/autoecole.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">AutoEcole</span></a>
+                </li>
+                
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="quiz" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/quizblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/quizzing_.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Quiz</span> </a>
+                </li>
+                
+                <li class="nav-item px-1" routerLinkActive="active">
+                    <a routerLink="cours" class="nav-link px-0 align-middle">
+                        <img src="../../../assets/Icon/coursblack.png" class="imageActive" width="25" alt="AutoEcole">
+                        <img src="../assets/Icon/Book.png" class="imageNonActive" width="25" alt="AutoEcole"> &nbsp; <span
+                            class="ms-1 d-none d-sm-inline">Cours</span> </a>
+                </li>
+            </ul>
+
+        <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button" routerLink="/help">
+            <mat-icon>help</mat-icon>
+            <span>Help</span>
+        </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        
+        <div class="content mat-elevation-z8">
+            <mat-toolbar class="mat-elevation-z8">
+                <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+                    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+                    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+                </button>
+                Responsive side navigation
+            </mat-toolbar>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->

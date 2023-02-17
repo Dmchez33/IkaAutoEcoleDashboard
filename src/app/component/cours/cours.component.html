@@ -7,12 +7,12 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active text-center" id="pills-home-tab" data-bs-toggle="pill"
                     data-bs-target="#Apprenants" type="button" role="tab" aria-controls="pills-home"
-                    aria-selected="true">Cours ouverts</button>
+                    aria-selected="true">Les Cours de conduites</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link text-center" id="pills-profile-tab" data-bs-toggle="pill"
                     data-bs-target="#Pautoecole" type="button" role="tab" aria-controls="pills-profile"
-                    aria-selected="false">Cours d'auto-école</button>
+                    aria-selected="false">Les panneaux de signalisation</button>
             </li>
         </ul>
     </div>
@@ -54,16 +54,16 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr *ngFor="let data of cours |filter:recherche">
-                                    <th scope="row"> {{data.theme}} </th>
+                                <tr *ngFor="let data of contenuCours |filter:recherche">
+                                    <th scope="row"> {{data.cours.libelle}} </th>
                                     <td> {{data.titre}} </td>
-                                    <td> {{data.description}} </td>
+                                    <td> {{data.description | slice:0:50}}.. </td>
                                     <td>
                                         <div class="row">
                                             <div class="col-sm-2 col-md-4 mb-1">
-                                                <span class="btn" routerLink="detail-utilisateur">
+                                                <a class="btn" routerLink="detail-cours/{{data.id}}">
                                                     <i class="bi bi-eye-fill"></i>
-                                                </span>
+                                                </a>
 
                                             </div>
                                             <div class="col-sm-2 col-md-4 mb-1">
@@ -96,8 +96,72 @@
 
         <div class="tab-pane fade show" id="Pautoecole" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
 
-            <div class="mat-elevation-z">
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button class="btn btn-outline-primary mb-2" data-bs-target="#MODALPOURPANNEAU"
+                            data-bs-toggle="modal">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
 
+                <div class="col">
+                    <div class="d-flex flex-row-reverse">
+
+                        <div class="mb-3">
+                            <input type="search" [(ngModel)]="recherche" class="form-control" id="rechercheinput"
+                                placeholder="Recherche">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mat-elevation-z">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type panneau</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr *ngFor="let data of allPanneaux |filter:recherche">
+                                    <th scope="row">{{data.typePanneaux.type}} </th>
+                                    <td> {{data.nom}} </td>
+                                    <td> {{data.description | slice:0:50}}.. </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <a class="btn" routerLink="detail-panneaux/{{data.id}}">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </a>
+
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <span class="btn">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4">
+                                                <span class="btn" data-bs-toggle="modal" data-bs-target="#supprimer">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent1 = $event">
+                        </mat-paginator>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -117,7 +181,7 @@
 
 
 
-
+<!--MODAL POUR L'AJOUT DU CONTENU DU COURS-->
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -131,45 +195,44 @@
 
                 <!--DEBUT FORMULAIRE-->
 
-
                 <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-6">
-                        <label for="titre" class="form-label">Titre</label>
-                        <input type="text" class="form-control" id="titre" required>
-                        <div class="valid-feedback">
+                        <label for="titreCours" class="form-label">Titre *</label>
+                        <input type="text" name="titreCours" [(ngModel)]="titreCours" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
                             Titre est obligatoire!
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
-                        <div class="valid-feedback">
+                        <label for="image" class="form-label">Image *</label>
+                        <input type="file" (change)="uploadImageContenu($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
                             Image est requise
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="email" class="form-label">Description</label>
-                        <textarea class="form-control" id="email" required></textarea>
-                        <div class="valid-feedback">
+                        <label for="descriptionCours" class="form-label">Description *</label>
+                        <textarea class="form-control" name="descriptionCours" [(ngModel)]="descriptionCours" id="email" required></textarea>
+                        <div class="invalid-feedback">
                             Description est requis!
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="image" class="form-label">Vocal</label>
-                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
-                        <div class="valid-feedback">
-                            Image est requise
+                        <label for="image" class="form-label">Vocal *</label>
+                        <input type="file" (change)="uploadVocal($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Vocal est requis
                         </div>
                     </div>
 
                     <div class="col-md-12 row">
-                        <label for="validationCustom04" class="form-label">Thème Cours</label>
+                        <label for="validationCustom04" class="form-label">Thème Cours *</label>
                             <div class="col-md-4">
                                 
-                                <select class="form-select" id="validationCustom04" required>
+                                <select class="form-select" id="validationCustom04" name="idCours" [(ngModel)]="idCours" required>
                                     <option selected disabled value="">Selectionner un cours</option>
-                                    <option>Règles générales</option>
-                                    <option value="">Définitions </option>
+                                    <option *ngFor="let cour of allCours" value="{{cour.id}}"> {{cour.libelle}} </option>
+                                    
                                 </select>
                                 <div class="invalid-feedback">
                                     Veillez selectionner un thème
@@ -184,7 +247,7 @@
                     </div>
 
                     <div class="col-12">
-                        <button class="btn btn-outline-primary" type="submit">Enregistrer</button>
+                        <button class="btn btn-outline-primary" type="submit" (click)="ajouterContenu()">Enregistrer</button>
                     </div>
                 </form>
 
@@ -204,15 +267,35 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Enregistrement</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Hide this modal and show the first with the button below.
+                
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Titre</label>
+                        <input type="text" name="libelleCours" [(ngModel)]="libelleCours" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            Nom du cours est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit" (click)="ajouterCours()">Enregistrer</button>
+                    </div>
+                </form>
+
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
-                    first</button>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Retour</button>
             </div>
         </div>
     </div>
@@ -241,3 +324,160 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--MODAL POUR L'AJOUT DU PANNEAU-->
+<div class="modal fade" id="MODALPOURPANNEAU" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Enregistrement</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+
+                <!--DEBUT FORMULAIRE-->
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="nomPanneaux" class="form-label">Nom *</label>
+                        <input type="text" name="nomPanneaux" [(ngModel)]="nomPanneaux" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            Nom est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image *</label>
+                        <input type="file" (change)="uploadImagePanneau($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="descriptionPanneaux" class="form-label">Description *</label>
+                        <textarea class="form-control" name="descriptionPanneaux" [(ngModel)]="descriptionPanneaux" id="descriptionPanneaux" required></textarea>
+                        <div class="invalid-feedback">
+                            Description est requis!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Vocal *</label>
+                        <input type="file" (change)="uploadVocalPanneau($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Vocal est requis
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Categorie *</label>
+                            <div class="col-md-4">
+                                
+                                <select class="form-select" id="validationCustom04" name="typePanneaux" [(ngModel)]="typePanneaux" required>
+                                    <option selected disabled value="">Selectionner un </option>
+                                    <option *ngFor="let cour of allType" value="{{cour.id}}"> {{cour.type}} </option>
+                                    
+                                </select>
+                                <div class="invalid-feedback">
+                                    Veillez selectionner un type de panneau
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btnadd" data-bs-target="#AjoutTypePanneaux" data-bs-toggle="modal">
+                                    <i class="bi add bi-plus-circle-fill"></i>
+                                </button>
+                            </div>
+                        
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit" (click)="postPanneaux()">Enregistrer</button>
+                    </div>
+                </form>
+
+                <!--FIN FORMULLAIRE-->
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AjoutTypePanneaux" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="AjoutTypePanneauxLabel">Enregistrement ppp</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="type" class="form-label">Titre</label>
+                        <input type="text" name="type" [(ngModel)]="type" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            le titre est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" (change)="uploadImageTypePanneau($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit" (click)="postTypePanneaux()">Enregistrer</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal SUPPRESSION -->
+<div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+                Êtes vous sur de vouloi supprimer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                <button type="button" class="btn btn-primary">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>
+

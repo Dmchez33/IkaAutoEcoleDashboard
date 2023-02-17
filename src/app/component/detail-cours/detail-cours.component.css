@@ -1,0 +1,13 @@
+.card-img-top{
+
+    object-fit: fill;
+    position: relative;
+    
+}
+image{
+    object-fit: contain;
+}
+
+.card-sub-title{
+    size: 14px;
+}

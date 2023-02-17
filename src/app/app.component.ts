@@ -1,6 +1,8 @@
 import { StorageService } from './service/storage/storage.service';
 import { AuthService } from './service/authentifier/auth.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 @Component({
@@ -16,11 +18,12 @@ export class AppComponent implements OnInit{
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  
   constructor(private authService: AuthService, private storageService: StorageService){
 
 
   }
-
+  
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
 

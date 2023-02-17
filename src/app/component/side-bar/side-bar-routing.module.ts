@@ -1,3 +1,6 @@
+import { DetailPanneauxComponent } from './../detail-panneaux/detail-panneaux.component';
+import { QuestionComponent } from './../question/question.component';
+import { DetailCoursComponent } from './../detail-cours/detail-cours.component';
 import { DashbordComponent } from './../dashbord/dashbord.component';
 import { UtilisateurComponent } from './../utilisateur/utilisateur.component';
 import { AutoEcoleComponent } from './../auto-ecole/auto-ecole.component';
@@ -8,9 +11,11 @@ import { DetailUtilisateurComponent } from './../detail-utilisateur/detail-utili
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VehiculeComponent } from '../vehicule/vehicule.component';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 const routes: Routes = [
     { 
-        path: 'side-bar', component: SideBarComponent,
+        path: 'side-bar', 
+        component: SideBarComponent,
         children:[
             {
                 path: '',
@@ -19,27 +24,37 @@ const routes: Routes = [
               },
             
               {
-                path:'dashboard', component:DashbordComponent
+                path:'dashboard',canActivate:[AuthGuard], component:DashbordComponent
               },
               {
-                path:'utilisateur', component:UtilisateurComponent
+                path:'utilisateur',canActivate:[AuthGuard], component:UtilisateurComponent
               },
               {
-                path:'auto-ecole', component:AutoEcoleComponent
+                path:'auto-ecole',canActivate:[AuthGuard], component:AutoEcoleComponent
               },
               {
-                path:'quiz', component:QuizComponent
+                path:'quiz',canActivate:[AuthGuard], component:QuizComponent
               },
               {
-                path:'cours', component:CoursComponent
+                path:'quiz/detail-question/:id',canActivate:[AuthGuard], component:QuestionComponent
               },
               {
-                path:'vehicule', component:VehiculeComponent
+                path:'cours/detail-panneaux/:id',canActivate:[AuthGuard], component:DetailPanneauxComponent
+              },
+              {
+                path:'cours',canActivate:[AuthGuard], component:CoursComponent
+              },
+              {
+                path:'vehicule',canActivate:[AuthGuard], component:VehiculeComponent
+              }
+              ,
+              {
+                path:'cours/detail-cours/:id',canActivate:[AuthGuard], component:DetailCoursComponent
               }
               ,
               
               {
-                path:'utilisateur/detail-utilisateur', component:DetailUtilisateurComponent
+                path:'utilisateur/detail-utilisateur/:id',canActivate:[AuthGuard], component:DetailUtilisateurComponent
               },
               { path: '**', redirectTo:'dashboard',pathMatch:'full'}
         ]

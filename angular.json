@@ -32,7 +32,13 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+
+            ],
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "@coreui/chartjs/dist/js/coreui-chartjs.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -9,6 +9,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #FFFFFF !important;
 }
 
 * {
@@ -49,19 +50,19 @@ body {
 .btnretour{
   border-color: #1A237E !important;
   color: #1A237E !important;
-  height: 30px !important;
+  /* height: 30px !important; */
 }
 
 .btnretour:hover{
   background-color: #1A237E !important;
   color: white !important;
 }
-.iconBack{
+/* .iconBack{
   font-size: larger;
   font-weight: bold;
   position: relative;
   bottom: 5px;
-}
+} */
 
 /*STYLE APPLIQUER AU DIFFERENT BUTTON DE SUPPRESSION MODIFICATION ET VOIR PLUS*/
 .bi-eye-fill{

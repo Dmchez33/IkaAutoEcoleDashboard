@@ -1,0 +1,158 @@
+<app-menu-bar [title]="title"></app-menu-bar>
+
+<div class="container">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button class="btn btnretour mb-2" data-bs-target="#exampleModalToggle"
+            data-bs-toggle="modal">
+            <span class="iconBack" (click)="goback()"> <i class="bi bi-arrow-left"></i> Retour </span>
+            
+        </button>
+    </div>
+    <div class="card mb-3 mt-3">
+        <div class="row g-0">
+            <div class="col-md-3">
+                <div class="align-self-center">
+                    <img src={{questionById.imageQuiz}} class="img-fluid rounded-start" alt="...">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h6 class="card-title">Quiz : {{questionById.quiz.titre}} </h6>
+                    <p class="card-title">Question : {{questionById.question}}</p>
+                    <div class="card-text">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                                    <button class="btn btn-outline-primary mb-2" data-bs-target="#exampleModalToggle2"
+                                        data-bs-toggle="modal">
+                                        <i class="bi bi-plus-circle-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mat-elevation-z">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th scope="col">Image</th>-->
+                                                <th scope="col">Réponse possible</th>
+                                                <th scope="col">Résultat</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+
+                                            <tr *ngFor="let donne of allreponse">
+                                                <!-- <th scope="row">
+                                                    <img src={{data.image}} alt="imagequiz" class="imageQuiz">
+                                                </th> -->
+                                                <td>{{donne.reponse}} </td>
+                                                <td> <span *ngIf="donne.iscorrect"> Vrai </span> <span
+                                                        *ngIf="!donne.iscorrect"> Faux </span> </td>
+
+                                                <td>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-2 col-md-4 mb-1">
+                                                            <span class="btn">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-4">
+                                                            <span class="btn" (click)="SuppressionModal(donne.id)">
+                                                                <i class="bi bi-trash-fill"></i>
+                                                            </span>
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--- MODAL UTILISER POUR AJOUTER DES Reponses -->
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"> Enregistrement </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-12">
+                        <label for="libelleCours" class="form-label">Réponse</label>
+                        <input type="text" name="reponse" [(ngModel)]="reponse" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            La reponse est obligatoire!
+                        </div>
+                    </div>
+
+                    <label for="validationCustom04" class="form-label">Status *</label>
+                    <div class="col-md-12">
+                        <select class="form-select" id="validationCustom04" name="iscorrest" [(ngModel)]="iscorrest"
+                            required>
+                            <option selected disabled value="">Selectionner un status</option>
+                            <option value="{{true}}"> Vrai </option>
+                            <option value="{{false}}"> Faux </option>
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Veillez selectionner un Status
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit"
+                            (click)="ajouterReponse()">Enregistrer</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                    data-bs-toggle="modal">Retour</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal SUPPRESSION -->
+<div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+                Êtes vous sur de vouloi supprimer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                <button type="button" class="btn btn-primary">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>

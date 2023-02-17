@@ -1,16 +1,17 @@
-import { QuizService } from './../../service/quiz/quiz.service';
+import { data } from 'jquery';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
-import { data } from 'jquery';
-
+import { QuizService } from './../../service/quiz/quiz.service';
+import { Location } from '@angular/common';
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css']
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css']
 })
-export class QuizComponent implements OnInit {
-  title ="Quiz"
+export class QuestionComponent implements OnInit {
+  title ="Detail-question"
   recherche: any;
   pageEvent1: any;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -36,26 +37,25 @@ export class QuizComponent implements OnInit {
   allreponse!:any;
   reponse!:any
   iscorrest!:any;
-  vocalContenu!:any;
-  reponseQuestion: any;
+  
+  questionById: any;
+  idquestion:any;
 
-
-  constructor(private serviceQuiz: QuizService) { }
+  constructor(private navigate: Location,private serviceQuiz: QuizService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.serviceQuiz.getAllQuiz().subscribe(data =>{
-      this.allQuiz = data
+    this.idquestion = this.route.snapshot.params['id'];
+    console.log(this.idquestion);
+    
+    this.serviceQuiz.gettReponseByIdQuestion(this.idquestion).subscribe(data =>{
+      this.allreponse = data
       console.log(data)
     });
 
-    this.serviceQuiz.getQuestion().subscribe(data =>{
-      this.allquestion = data
-      console.log(data)
-    });
-    this.serviceQuiz.gettAllReponse().subscribe(data =>{
-      this.allreponse = data
-      console.log(data)
+    this.serviceQuiz.getQuestionById(this.idquestion).subscribe(data =>{
+      console.log(data);
+      this.questionById = data;
     });
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -81,54 +81,20 @@ export class QuizComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-    this.paginator!.page
-      .subscribe(
-        (event: any) => {
-          this.quiz = this.allQuiz.slice(event.pageIndex * event.pageSize, (event.pageIndex + 1) * event.pageSize);
-        });
+  
 
-  }
-
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
-
-  //uploade Image Cours
-
-  uploadImage(event: any) {
-    if (event.target.files.length > 0) {
-       this.imageQuizs = event.target.files[0];
-      // do something with the file
-    }
-
-
-  }
+  
 
 //uploade vocal
 
-uploadImageQuestion(event: any) {
-  if (event.target.files.length > 0) {
-    this.imagequestion = event.target.files[0];
-    // do something with the file
-  }
 
 
-}
-
-  //METHODE PERMETANT D'OBTENIR TOUT LE CONTENU DU COURS
-  getAllQuiz() {
-    this.serviceQuiz.getAllQuiz().subscribe(data =>{
-      this.allQuiz = data
-      console.log(data)
-    });
-  }
 
   //METHODE PERMETANT D'OBTENIR TOUT LE Question
-  getAllQuestion() {
+  getAllReponse() {
     console.log("cour ajouter")
-    this.serviceQuiz.getQuestion().subscribe(data =>{
-      this.allquestion = data
+    this.serviceQuiz.gettAllReponse().subscribe(data =>{
+      this.allreponse = data
       console.log(data)
     });
   }
@@ -139,7 +105,7 @@ uploadImageQuestion(event: any) {
       data =>{
         if(data.message == 'Ok'){
           this.popUp();
-          this.getAllQuiz();
+         this.getAllReponse();
           this.titreQuiz = '';
           this.descriptionQuiz = '';
           this.imageQuizs ;
@@ -152,7 +118,7 @@ uploadImageQuestion(event: any) {
               heightAuto: false,
               showConfirmButton: true,
               confirmButtonText: "D'accord",
-              confirmButtonColor: '#6200EE',
+              confirmButtonColor: '#1A237E',
               showDenyButton: false,
               showCancelButton: false,
               allowOutsideClick: false
@@ -163,24 +129,26 @@ uploadImageQuestion(event: any) {
     )
     
   }
-//Acutalise une fois cours ajouter 
-aletre(): void {
-  setTimeout(() => {
-    this.getAllQuiz();
-  }, 1000);
-}
+
   //METHODE PERMETTANT D'AJOUTER DU QUESTION
-  ajouterQuestion(){
+  // ajouterQuestion(){
+  //   console.log("bonjour")
+  //   this.serviceQuiz.postQuestion(this.question,this.reponseQuestion,this.imagequestion).subscribe(
+  //     data =>{
+  //       console.log(data)
+  //     }
+  //   )
+  // }
+
+  //METHODE PERMETTANT D'AJOUTER DU QUESTION
+  ajouterReponse(){
     console.log("bonjour")
-    this.serviceQuiz.postQuestion(this.question,this.questionQuiz,this.imagequestion).subscribe(
+    
+    this.serviceQuiz.postReponse(this.reponse,this.iscorrest,this.idquestion).subscribe(
       data =>{
         if(data.message == 'Ok'){
-          this.popUpquestion();
-          this.getAllQuestion();
-          this.titreQuiz = '';
-          this.descriptionQuiz = '';
-          this.imageQuizs ;
-          
+          this.popUp();
+         this.getAllReponse();
         }else{
           
             Swal.fire({
@@ -189,7 +157,7 @@ aletre(): void {
               heightAuto: false,
               showConfirmButton: true,
               confirmButtonText: "D'accord",
-              confirmButtonColor: '#6200EE',
+              confirmButtonColor: '#1A237E',
               showDenyButton: false,
               showCancelButton: false,
               allowOutsideClick: false
@@ -200,33 +168,11 @@ aletre(): void {
     )
   }
 
-  //METHODE PERMETTANT D'AJOUTER DU QUESTION
-  // ajouterReponse(){
-  //   console.log("bonjour")
-  //   this.serviceQuiz.postReponse(this.reponse,this.iscorrest).subscribe(data =>{
-  //     console.log(data);
-  //   })
-  // }
-
   //POPUP UTILISER POUR ENREGISTRE UN COURS
   popUp() {
     Swal.fire({
       title: 'Félicitation !!',
-      text: 'Quiz ajouté avec succes',
-      heightAuto: false,
-      showConfirmButton: true,
-      confirmButtonText: "D'accord",
-      confirmButtonColor: '#1A237E',
-      showDenyButton: false,
-      showCancelButton: false,
-      allowOutsideClick: false
-    })
-  }
-  //POPUP UTILISER POUR ENREGISTRE UN Question
-  popUpquestion() {
-    Swal.fire({
-      title: 'Félicitation !!',
-      text: 'Question ajoutée avec succes',
+      text: 'Reponse ajouté avec succes',
       heightAuto: false,
       showConfirmButton: true,
       confirmButtonText: "D'accord",
@@ -237,4 +183,56 @@ aletre(): void {
     })
   }
 
+  goback(){
+    this.navigate.back();
+  }
+
+  //METHODE PERMETTANT DE SUPPRIMER UNE REPONSE PAR SON ID
+  deleteReponseById(id:any){
+    this.serviceQuiz.deleteReponseById(id).subscribe(data =>{
+      if(data.message == 'Ok'){
+        this.getAllReponse();
+        Swal.fire({
+          title: 'Félicitation !!',
+          text: 'Reponse supprimée avec succes',
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+
+      }else{
+        Swal.fire({
+          title: ' ERREUR !!',
+          text: data.message,
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }
+    })
+  }
+
+  SuppressionModal(id:any){
+    Swal.fire({
+      title: "Voulez vous vraiment suprimer?",
+      showConfirmButton: true,
+      confirmButtonText: "OK",
+      confirmButtonColor: '#FF0000',
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteReponseById(id);
+
+          
+    }
+  });
+  }
 }

@@ -10,4 +10,7 @@ import { CommonModule } from '@angular/common';
     SiedBarRoutingModule
   ]
 })
-export class SideBarModule { }
+export class SideBarModule { 
+  
+
+}

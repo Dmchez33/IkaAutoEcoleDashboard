@@ -1,1 +1,359 @@
 <app-menu-bar [title]="title"></app-menu-bar>
+
+<div class="container">
+    <div class="d-flex flex-row-reverse">
+        <ul class=" bg-white border border-2 nav nav-pills mt-3 mb-2 d-flex justify-content-end" id="pills-tab"
+            role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active text-center" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#Apprenants" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">Quiz</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link text-center" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#Pautoecole" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">Question</button>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade show active" id="Apprenants" role="tabpanel" aria-labelledby="pills-home-tab"
+            tabindex="0">
+
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button class="btn btn-outline-primary mb-2" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="d-flex flex-row-reverse">
+
+                        <div class="mb-3">
+                            <input type="search" [(ngModel)]="recherche" class="form-control" id="rechercheinput"
+                                placeholder="Recherche">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mat-elevation-z">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-align">
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr class="text-align" *ngFor="let data of allQuiz |filter:recherche">
+                                    <th scope="row">
+                                        <img src={{data.imageName}} alt="imagequiz" class="imageQuiz">
+                                    </th>
+                                    <td> {{data.titre}} </td>
+                                    <td> {{data.description | slice:0:20}}.. </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <a class="btn" routerLink="detail-cours/{{data.id}}">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </a>
+
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <span class="btn">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4">
+                                                <span class="btn" data-bs-toggle="modal" data-bs-target="#supprimer">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent1 = $event">
+                        </mat-paginator>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="tab-pane fade show" id="Pautoecole" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button class="btn btn-outline-primary mb-2" data-bs-target="#exampleModalToggle2"
+                            data-bs-toggle="modal">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="d-flex flex-row-reverse">
+
+                        <div class="mb-3">
+                            <input type="search" [(ngModel)]="recherche" class="form-control" id="rechercheinput"
+                                placeholder="Recherche">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mat-elevation-z">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-align">
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Question</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr class="text-align" *ngFor="let data of allquestion |filter:recherche">
+                                    <th scope="row">
+                                        <img src={{data.imageQuiz}} alt="imagequiz" class="imageQuiz">
+                                    </th>
+                                    <td> {{data.question}} </td>
+                                    <!-- <td> {{data.description | slice:0:50}}.. </td> -->
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <a class="btn" routerLink="detail-question/{{data.id}}">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 mb-1">
+                                                <span class="btn">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4">
+                                                <span class="btn" data-bs-toggle="modal" data-bs-target="#supprimer">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent1 = $event">
+                        </mat-paginator>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--MODAL POUR L'AJOUT DU Quiz-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Enregistrement</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+
+                <!--DEBUT FORMULAIRE-->
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="titreCours" class="form-label">Titre *</label>
+                        <input type="text" name="titreQuiz" [(ngModel)]="titreQuiz" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Titre est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image *</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="descriptionCours" class="form-label">Description *</label>
+                        <textarea class="form-control" name="descriptionQuiz" [(ngModel)]="descriptionQuiz" id="email"
+                            required></textarea>
+                        <div class="invalid-feedback">
+                            Description est requis!
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label for="image" class="form-label">Vocal *</label>
+                        <input type="file" (change)="uploadVocal($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Vocal est requise
+                        </div>
+                    </div> -->
+
+                    <div class="col-md-12 row">
+                        <!-- <label for="validationCustom04" class="form-label">Quiz *</label>
+                            <div class="col-md-4">
+                                
+                                <select class="form-select" id="validationCustom04" name="questionQuiz" [(ngModel)]="questionQuiz" required>
+                                    <option selected disabled value="">Selectionner une question</option>
+                                    <option *ngFor="let question of allquestion" value="{{question}}"> {{question.question}} </option>
+                                    
+                                </select>
+
+                                <div class="invalid-feedback">
+                                    Veillez selectionner un thème
+                                </div>
+                            </div> -->
+                        <!-- <div class="col-md-2">
+                                <button class="btn btnadd" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                                    <i class="bi add bi-plus-circle-fill"></i>
+                                </button>
+                            </div> -->
+
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit"
+                            (click)="ajouterQuiz()">Enregistrer</button>
+                    </div>
+                </form>
+
+                <!--FIN FORMULLAIRE-->
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open
+                    second
+                    modal</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!--- MODAL UTILISER POUR AJOUTER DES QUIZ -->
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"> Enregistrement </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Question</label>
+                        <input type="text" name="question" [(ngModel)]="question" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            La question est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" (change)="uploadImageQuestion($event)" class="form-control" id="image"
+                            required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Quiz *</label>
+
+                        <div class="col-md-6">
+                            <select class="form-select" id="validationCustom04" name="questionQuiz"
+                                [(ngModel)]="questionQuiz" required>
+                                <option selected disabled value="">Selectionner un quiz</option>
+                                <option *ngFor="let quiz of allQuiz" value="{{quiz.id}}"> {{quiz.titre}} </option>
+    
+                            </select>
+    
+                            <div class="invalid-feedback">
+                                Veillez selectionner un quiz
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btnadd" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                <i class="bi add bi-plus-circle-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-12">
+                        <button class="btn btn-outline-primary" type="submit"
+                            (click)="ajouterQuestion()">Enregistrer</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                    data-bs-toggle="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal SUPPRESSION -->
+<div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                <span type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="bi bi-backspace-fill"></i></span>
+            </div>
+            <div class="modal-body">
+                Êtes vous sur de vouloi supprimer ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">non</button>
+                <button type="button" class="btn btn-primary">Oui</button>
+            </div>
+        </div>
+    </div>
+</div>
