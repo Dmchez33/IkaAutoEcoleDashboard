@@ -5,7 +5,7 @@
 <!--Fin Menu-->
 
 <!--DEBUT STATISTIQUE SOUS FORME DE CARD-->
-<div class="jumbotron mt-3">
+<!-- <div class="jumbotron mt-3">
   <div class="row w-100">
 
     <div class="col m-2">
@@ -50,28 +50,90 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<div class="row w-100 mb-3">
+  <div class="col-md-4">
+    <div class="card m-1 mt-4 w-100">
+      <div class=" d-flex justify-content-center">
+        <img class="imag" src="../../../assets/logo/cours_conduite.png" alt="" srcset="">
+      </div>
+      <div class="contenu">
+        Nombre de cours Ouverts
+      </div>
+    </div>
 
-<div class="row w-100">
-  <div class="col-12">
-    <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
-    [type]="barChartType">
-  </canvas>
-  </div>
-  <div class="col-5">
-    <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins">
-        </canvas>
-        <br>
-    
+    <div class="card m-1 mt-4 w-100">
 
-    <!-- <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button> -->
+      <div class="d-flex justify-content-center">
+        <img class="imag" src="../../../assets/logo/quiz1.png" alt="" srcset="">
+      </div>
+      <div class="contenu">
+        Nombre de quiz
+      </div>
+    </div>
+
+    <div class="card m-1 mt-4 w-100">
+      <div class=" d-flex justify-content-center">
+        <img class="imag"  src="../../../assets/logo/users.png" alt="" srcset="">
+      </div>
+      <div class="contenu">
+        Nombre d'utilisateur
+      </div>
+    </div>
+
   </div>
-  <div class="col-7">
-    <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
+  <div class="col-md-8">
+    <div class="map-container m-2" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
       (leafletClick)="mapClicked($event)">
     </div>
   </div>
 </div>
 
-
+ <div class="row w-100 mt-1 ">
+  
+  <div class="col-md-12">
+    
+    <div class="mat-elevation-z m-2">
+      <h5>
+        La listes des apprenants connectés
+      </h5>
+      <table class="table">
+          <thead>
+              <tr>
+                  
+                  <th scope="col">Réponse possible</th>
+                  <th scope="col">Résultat</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody class="table-group-divider">
+    
+              <tr >
+                  
+                  <td>dddd </td>
+                  <td> <span > Vrai </span> <span
+                          > Faux </span> </td>
+    
+                  <td>
+                      <div class="row">
+    
+                          <div class="col-sm-2 col-md-4 mb-1">
+                              <span class="btn">
+                                  <i class="bi bi-pencil-square"></i>
+                              </span>
+                          </div>
+                          <div class="col-sm-2 col-md-4">
+                              <span class="btn">
+                                  <i class="bi bi-trash-fill"></i>
+                              </span>
+    
+                          </div>
+                      </div>
+                  </td>
+              </tr>
+    
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -131,7 +131,9 @@ export class DashbordComponent implements OnInit {
       })
     ],
     zoom: 16,
-    center: { lat: 28.626137, lng: 79.821603 }
+    center: {
+       lat: 28.626137, 
+       lng: 79.821603 }
   }
 
   initMarkers() {

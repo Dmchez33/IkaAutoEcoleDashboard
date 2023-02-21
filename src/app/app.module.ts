@@ -46,6 +46,7 @@ import {
   TableModule,
   TabsModule
 } from '@coreui/angular';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { QuestionComponent } from './component/question/question.component';
 import { AuthIntercept } from './httpIntercept/auth.intercept';
 import { DetailPanneauxComponent } from './component/detail-panneaux/detail-panneaux.component';
@@ -101,6 +102,7 @@ import { DetailPanneauxComponent } from './component/detail-panneaux/detail-pann
     TabsModule,
     DropdownModule,
     HeaderModule,
+    NgMultiSelectDropDownModule
   ], 
   providers: [ { provide: MatPaginatorIntl, useClass: paginationPersonnalise}, AuthIntercept],
   bootstrap: [AppComponent]
