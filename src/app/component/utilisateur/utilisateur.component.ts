@@ -4,6 +4,7 @@ import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-pag
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-utilisateur',
   templateUrl: './utilisateur.component.html',
@@ -38,7 +39,13 @@ export class UtilisateurComponent implements OnInit {
   email: any;
   password: any;
   telephone: any;
+  nom:any;
+  prenom:any;
   file: any;
+
+  allAdmin:any;
+  allApprenant:any;
+  apprenant!:any[];
 
   ngAfterViewInit() {
     this.paginator!.page
@@ -53,6 +60,21 @@ export class UtilisateurComponent implements OnInit {
   constructor(private serviceUtilisateur: UtilisateurService) { }
 
   ngOnInit(): void {
+    this.serviceUtilisateur.getAllProprietaire().subscribe(
+      data =>{
+        console.log(data);
+        this.allAdmin = data;
+      }
+    )
+
+    this.serviceUtilisateur.getAllApprenant().subscribe(
+      data =>{
+        console.log(data);
+        this.allApprenant = data;
+      }
+    )
+
+    this.apprenant =  this.allApprenant
 
   }
 
@@ -78,6 +100,36 @@ export class UtilisateurComponent implements OnInit {
     }
 
 
+  }
+
+  postApprenant(){
+    this.serviceUtilisateur.postApprenant(this.username,this.email,this.password,this.nom,this.prenom,this.telephone).subscribe(data =>{
+      if(data.message == 'Ok'){
+        Swal.fire({
+          title: 'Félicitation !!',
+          text: 'Utilisateur ajouté avec succes',
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }else{
+        Swal.fire({
+          title: 'Alerte !!',
+          text: data.message,
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }
+    })
   }
 
 

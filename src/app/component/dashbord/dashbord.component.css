@@ -2,7 +2,14 @@
   height: 100%;
   box-shadow: 2px 1px 2px #1A237E;
 }
+@media screen and (max-width: 460px) {
 
+  /* styles pour une taille d'écran de 800px ou moins */
+  .map-container{
+    height: 300px;
+    box-shadow: 2px 1px 2px #1A237E;
+  }
+}
   
  .card{
   height: 100px;

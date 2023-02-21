@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
-                                <tr *ngFor="let data of persons |filter:recherche">
+                                <tr *ngFor="let data of apprenant |filter:recherche">
                                     <th scope="row"> {{data.nom}} </th>
                                     <td> {{data.prenom}} </td>
                                     <td> {{data.telephone}} </td>
@@ -136,14 +136,14 @@
                 <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-6">
                         <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" required>
+                        <input type="text" class="form-control" id="prenom" name="prenom" [(ngModel)]="prenom" required>
                         <div class="valid-feedback">
                             Prenom est requis!
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" required>
+                        <input type="text" class="form-control" id="nom" [(ngModel)]="nom" name="nom" required>
                         <div class="valid-feedback">
                             Nom est requis!
                         </div>
@@ -151,28 +151,28 @@
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="email" id="email" required>
                         <div class="valid-feedback">
                             email est requis!
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="telephone" class="form-label">Téléphone</label>
-                        <input type="tel" class="form-control" id="telephone" required>
+                        <input type="tel" class="form-control" name="telephone" [(ngModel)]="telephone" id="telephone" required>
                         <div class="valid-feedback">
                             Téléphone est requis!
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="image" class="form-label">Prénom</label>
                         <input type="file" class="form-control" id="image" required>
                         <div class="valid-feedback">
                             Image est requise
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <label for="mpd" class="form-label">Mot de passe</label>
-                        <input type="text" (change)="uploadImage($event)" class="form-control" id="mpd" required>
+                        <input type="text" name="password" [(ngModel)]="password" class="form-control" id="mpd" required>
                         <div class="valid-feedback">
                             Mot de passe est requis!
                         </div>
@@ -192,7 +192,7 @@
 
 
                     <div class="col-12">
-                        <button class="btn btn-outline-primary" type="submit">Enregistrer</button>
+                        <button class="btn btn-outline-primary" type="submit" (click)="postApprenant()">Enregistrer</button>
                     </div>
                 </form>
 

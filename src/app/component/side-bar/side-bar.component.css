@@ -19,6 +19,7 @@
   .main {
     margin-left: 40px;
   }
+
 }
 
 .nav-item {
@@ -77,7 +78,7 @@
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 860px) {
 
   /* styles pour une taille d'écran de 800px ou moins */
   .example-sidenav {
