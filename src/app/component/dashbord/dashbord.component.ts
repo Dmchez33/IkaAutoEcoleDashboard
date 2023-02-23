@@ -5,6 +5,9 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
 import { MenuBarComponent } from '../../menu-bar/menu-bar.component';
 import * as Leaflet from 'leaflet'; 
+import { CoursService } from 'src/app/service/cours/cours.service';
+import { QuizService } from 'src/app/service/quiz/quiz.service';
+import { UtilisateurService } from 'src/app/service/utilisateur/utilisateur.service';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
 
@@ -15,11 +18,47 @@ Leaflet.Icon.Default.imagePath = 'assets/';
 })
 export class DashbordComponent implements OnInit {
   title = "Dashboard"
-
-  constructor() { }
+  allCoursLength:any;
+  allQuizLength:any;
+  nombre:any;
+  allAdmin: any;
+  allApprenant: any;
+  allUserConnected:any;
+  constructor(private serviceUtilisateur: UtilisateurService,private serviceCours: CoursService,private serviceQuiz: QuizService) { }
 
   ngOnInit(): void {
-   
+    this.serviceCours.listeAllCours().subscribe(data => {
+      this.allCoursLength = data.length
+      console.log(data.length)
+
+    });
+
+    this.serviceQuiz.getAllQuiz().subscribe(data =>{
+      this.allQuizLength = data.length
+      console.log(data)
+    });
+
+    this.serviceUtilisateur.getAllProprietaire().subscribe(
+      data =>{
+        console.log(data);
+        this.allAdmin = data.length;
+      }
+    )
+
+    this.serviceUtilisateur.getAllApprenant().subscribe(
+      data =>{
+        console.log(data);
+        this.allApprenant = data.length;
+      }
+    )
+
+    this.serviceUtilisateur.getAllUserConnected().subscribe(
+      data =>{
+        console.log(data);
+        this.allUserConnected = data;
+      }
+    )
+
   }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;

@@ -59,6 +59,11 @@
       </div>
       <div class="contenu">
         Nombre de cours Ouverts
+        <br>
+        <span>
+          {{allCoursLength}}
+        </span>
+        
       </div>
     </div>
 
@@ -69,6 +74,11 @@
       </div>
       <div class="contenu">
         Nombre de quiz
+        <br>
+        <span>
+          {{allQuizLength}}
+        </span>
+        
       </div>
     </div>
 
@@ -78,6 +88,10 @@
       </div>
       <div class="contenu">
         Nombre d'utilisateur
+        <br>
+        <span>
+          {{allApprenant + allAdmin}}
+        </span>
       </div>
     </div>
 
@@ -101,19 +115,19 @@
           <thead>
               <tr>
                   
-                  <th scope="col">Réponse possible</th>
-                  <th scope="col">Résultat</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Telephone</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Action</th>
               </tr>
           </thead>
           <tbody class="table-group-divider">
     
-              <tr >
+              <tr *ngFor="let user of allUserConnected">
                   
-                  <td>dddd </td>
-                  <td> <span > Vrai </span> <span
-                          > Faux </span> </td>
-    
+                  <td> {{user.username}} </td>
+                  <td> {{user.telephone}} </td>
+                  <td> {{user.email}} </td>
                   <td>
                       <div class="row">
     

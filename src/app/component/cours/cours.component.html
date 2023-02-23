@@ -230,7 +230,7 @@
                             <div class="col-md-4">
                                 
                                 <select class="form-select" id="validationCustom04" name="idCours" [(ngModel)]="idCours" required>
-                                    <option selected disabled value="">Selectionner un cours</option>
+                                    <!-- <option selected disabled value="">Selectionner un cours</option> -->
                                     <option *ngFor="let cour of allCours" value="{{cour.id}}"> {{cour.libelle}} </option>
                                     
                                 </select>
@@ -390,7 +390,7 @@
                             <div class="col-md-4">
                                 
                                 <select class="form-select" id="validationCustom04" name="typePanneaux" [(ngModel)]="typePanneaux" required>
-                                    <option selected disabled value="">Selectionner un </option>
+                                    
                                     <option *ngFor="let cour of allType" value="{{cour.id}}"> {{cour.type}} </option>
                                     
                                 </select>

@@ -8,38 +8,49 @@
             
         </button>
     </div>
-    <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-2">
-              <img src="../../../assets/image/profil3.png" width="auto" class="img-fluid imageDetailU" alt="nom de l'utilisateur">
-            </div>
-            <div class="col-md-10">
-                <table>
-                    <tr>
-                        <th>Prénom :</th>
-                        <td>Idrissa</td>
-                    </tr>
-                    <tr>
-                        <th>Nom : </th>
-                        <td>Dembele</td>
-                    </tr>
-                    <tr>
-                        <th>E-mail : </th>
-                        <td>iddembele206@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <th>Téléphone : </th>
-                        <td>+223 83252448</td>
-                    </tr>
-                    <tr>
-                        <th>Date d'inscription : </th>
-                        <td>23-12-1999</td>
-                    </tr>
-                </table>
-             
-            </div>
-          </div>
+    <div class="row">
+        <div class="col-md-2">
+
         </div>
-      </div>    
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <img src="{{adminById.image}}" width="auto" class="img-fluid imageDetailU" alt="nom de l'utilisateur">
+                    </div>
+                    <div class="col-md-10">
+                        <table>
+                            <tr>
+                                <th>Prénom :</th>
+                                <td> {{adminById.prenom}} </td>
+                            </tr>
+                            <tr>
+                                <th>Nom : </th>
+                                <td> {{adminById.nom}} </td>
+                            </tr>
+                            <tr>
+                                <th>E-mail : </th>
+                                <td> {{adminById.email}} </td>
+                            </tr>
+                            <tr>
+                                <th>Téléphone : </th>
+                                <td> {{adminById.telephone}} </td>
+                            </tr>
+                            <!-- <tr>
+                                <th>Date d'inscription : </th>
+                                <td>23-12-1999</td>
+                            </tr> -->
+                        </table>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>  
+        </div>
+        <div class="col-md-2">
+            
+        </div>
+    </div>
+      
 </div>

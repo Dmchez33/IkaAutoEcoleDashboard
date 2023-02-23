@@ -52,7 +52,15 @@ export class UtilisateurService {
 
     return this.http.post(HTTP_APRENANT + `save`, apprenant)
   }
-  //UPDATE PROPRIETAIRE AUTOECOLE
+  //Get PROPRIETAIRE By ID AUTOECOLE
+  getProprietaireById(id:any):Observable<any>{
+    return this.http.get(HTTP_Admin+`getById/${id}`);
+  }
+
+  //GET ALL USER CONNECTED
+  getAllUserConnected():Observable<any>{
+    return this.http.get(`http://localhost:8080/api/auth/getAuserConnected`);
+  }
   //UPDATE APPRENANT AUTOECOLE
   //DELETE PROPRIETAIRE AUTOECOLE
   //DELETE APPRENANT AUTOECOLE

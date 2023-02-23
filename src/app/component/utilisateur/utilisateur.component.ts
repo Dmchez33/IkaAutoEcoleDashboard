@@ -75,6 +75,25 @@ export class UtilisateurComponent implements OnInit {
     )
 
     this.apprenant =  this.allApprenant
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll<HTMLInputElement>('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
 
   }
 
@@ -96,8 +115,38 @@ export class UtilisateurComponent implements OnInit {
       "username": this.username,
       "email": this.email,
       "password": this.password,
-      "telephone": this.telephone
+      "telephone": this.telephone,
+      "nom":this.nom,
+      "prenom":this.prenom
     }
+
+    this.serviceUtilisateur.postAdmin(donnee,this.file).subscribe(data =>{
+      if(data.message == 'Ok'){
+        Swal.fire({
+          title: 'Félicitation !!',
+          text: 'Admin ajouté avec succes',
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }else{
+        Swal.fire({
+          title: 'Alerte !!',
+          text: data.message,
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }
+    })
 
 
   }

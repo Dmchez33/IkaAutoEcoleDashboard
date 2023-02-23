@@ -114,6 +114,7 @@ export class CoursComponent implements OnInit {
   ngAfterViewInit() {
     this.paginator!.page
       .subscribe(
+        
         (event: any) => {
           this.cours = this.allCours.slice(event.pageIndex * event.pageSize, (event.pageIndex + 1) * event.pageSize);
         });
@@ -215,10 +216,12 @@ aletre(): void {
       if(data.message == 'Ok'){
         this.popUpCours();
         this.libelleCours = '';
+        this.getAllCours();
       }else{
         Swal.fire({
           title: 'Alerte !!',
           text: data.message,
+          
           heightAuto: false,
           showConfirmButton: true,
           confirmButtonText: "D'accord",
@@ -230,7 +233,7 @@ aletre(): void {
       }
       //this.aletre();
     })
-    this.getAllCours();
+    
   }
 
   //***************LES METHODE SUR LE PANNEAU DE LA ROUTE */
@@ -273,6 +276,7 @@ aletre(): void {
   }
   //AD PANNEAUX
   postPanneaux(){
+    console.log(this.typePanneaux);
     this.serviceCours.ajouterPanneaux(this.nomPanneaux, this.descriptionPanneaux,this.typePanneaux, this.imagePanneaux,this.audioPanneaux).subscribe(
       data =>{
         if(data.message == 'Ok'){
