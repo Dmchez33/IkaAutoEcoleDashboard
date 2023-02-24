@@ -18,31 +18,30 @@ export class AutoecoleService {
   //GET AUTOECOLE PAR ID
 
   //POST AUTOECOLE
-  postAutoEcole(nom:any,rue:any,porte:any,long:any,lat:any,vehicule:any,typeCours:any,adresse:any,admin:any):Observable<any>{
+  postAutoEcole(nom:any,rue:any,porte:any,vehicule:any,typeCours:any,adresse:any,admin:any):Observable<any>{
     let data = new FormData();
     let auto = {
     
       "nom": nom,
       "status": false,
-      "longitude":long,
-      "latitude":lat,
+      
       "porte":porte,
       "rue":rue,
       "adresses": [
           
           {
-            "id":adresse
+            "id":adresse.id
           }
 
           ],
       "vehicules": [
           {
-            "id":vehicule
+            "id":vehicule.id
           }
           ],
       "typeCours": [
           {
-            "id":typeCours
+            "id":typeCours.id
           }
       ]
       
@@ -50,15 +49,22 @@ export class AutoecoleService {
     return this.http.post(`http://localhost:8080/api/AutoEcole/save/${admin}`,auto);
   }
   //Post Adresse
-  postAdresse(ville:any,quartier:any):Observable<any>{
+  postAdresse(ville:any,quartier:any,long:any,lat:any):Observable<any>{
     let donne = {
     
       "ville": ville,
-      "quartier": quartier
+      "quartier": quartier,
+      "longitude":long,
+      "latitude":lat,
+
   }
   return this.http.post(`http://localhost:8080/api/AutoEcole/addAdresse`,donne);
   }
 
+  //GETALL ADRESSE
+  getAllAdresse():Observable<any>{
+    return this.http.get(`http://localhost:8080/api/AutoEcole/getallAdresse`)
+  }
   //postVehicule
   postVehicule(nom:any,typevehicule:any,marque:any,image:any):Observable<any>{
     let data = new FormData()
@@ -76,8 +82,26 @@ export class AutoecoleService {
 
     return this.http.post(`http://localhost:8080/api/AutoEcole/addVehicule`,data);
   }
-  //DELETE AUTOECOLE
+  //getVehicule
+  getAllVehicule():Observable<any>{
+    return this.http.get(`http://localhost:8080/api/AutoEcole/getAllVehicule`);
+  }
 
-  //
+  //Post Type de cours
+  postTypeCours(nomcours:any,imageCours:any):Observable<any>{
+    let data = new FormData();
+    let typeCours = [
+      {     
+        "nomcours": nomcours
+       }
+    ]
+    data.append('typeImage',imageCours);
+    data.append('typeCours',JSON.stringify(typeCours).slice(1, JSON.stringify(typeCours).lastIndexOf(']')))
+    return this.http.post(`http://localhost:8080/api/AutoEcole/addtypecours`,data);
+  }
+
+  getTypeCours():Observable<any>{
+    return this.http.get(`http://localhost:8080/api/AutoEcole/getAllCours`);
+  }
 
 }

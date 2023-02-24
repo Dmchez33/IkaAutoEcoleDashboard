@@ -1,7 +1,9 @@
+import { AutoecoleService } from './../../service/autoecole/autoecole.service';
 import { QuizService } from './../../service/quiz/quiz.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
+import { UtilisateurService } from 'src/app/service/utilisateur/utilisateur.service';
 @Component({
   selector: 'app-auto-ecole',
   templateUrl: './auto-ecole.component.html',
@@ -38,24 +40,66 @@ export class AutoEcoleComponent implements OnInit {
   reponseQuestion: any;
 
 
-  constructor(private serviceQuiz: QuizService) { }
+  //DECLARATION DES ATTRIBUTS D'AUTOECOLE
+  nomAuto:any
+  porte:any;
+  rue:any;
+  telephone:any;
+  autoAdresse:any;
+  autoCours:any;
+  autoVehicule:any;
+  autoAdmin:any;
+  autoecole:any;
+
+  //Adresse Attribut
+  ville:any;
+  quartier:any;
+  long:any;
+  lat:any;
+  adresse:any;
+
+  //VEHICULE
+  marquevehicule:any;
+  typevehicule:any;
+  nomvehicule:any;
+  imageVehicule:any;
+  vehicule:any;
+
+  //TYPECOURS
+  nomcours:any;
+  imagecours:any;
+  typecours:any;
+
+  //admin
+  allAdmin:any;
+  
+  constructor(private serviceUtilisateur: UtilisateurService,private serviceautoecole: AutoecoleService, private serviceQuiz: QuizService) { }
 
   ngOnInit(): void {
-
-    this.serviceQuiz.getAllQuiz().subscribe(data =>{
-      this.allQuiz = data
+    this.serviceautoecole.getAllAutoEcole().subscribe(data =>{
       console.log(data)
+      this.autoecole = data;
+    })
+
+    this.serviceautoecole.getAllAdresse().subscribe(data =>{
+      console.log(data)
+      this.adresse = data;
+    });
+    this.serviceautoecole.getAllVehicule().subscribe(data =>{
+      console.log(data)
+      this.vehicule = data
+    });
+    this.serviceautoecole.getTypeCours().subscribe(data =>{
+      console.log(data)
+      this.typecours = data;
     });
 
-    this.serviceQuiz.getQuestion().subscribe(data =>{
-      this.allquestion = data
-      console.log(data)
-    });
-    this.serviceQuiz.gettAllReponse().subscribe(data =>{
-      this.allreponse = data
-      console.log(data)
-    });
-
+    this.serviceUtilisateur.getAllProprietaire().subscribe(
+      data =>{
+        console.log(data);
+        this.allAdmin = data;
+      }
+    );
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
       'use strict'
@@ -96,7 +140,7 @@ export class AutoEcoleComponent implements OnInit {
 
   uploadImage(event: any) {
     if (event.target.files.length > 0) {
-       this.imageQuizs = event.target.files[0];
+       this.imageVehicule = event.target.files[0];
       // do something with the file
     }
 
@@ -107,110 +151,72 @@ export class AutoEcoleComponent implements OnInit {
 
 uploadImageQuestion(event: any) {
   if (event.target.files.length > 0) {
-    this.imagequestion = event.target.files[0];
+    this.imagecours = event.target.files[0];
     // do something with the file
   }
 
 
 }
 
-  //METHODE PERMETANT D'OBTENIR TOUT LE CONTENU DU COURS
-  getAllQuiz() {
-    this.serviceQuiz.getAllQuiz().subscribe(data =>{
-      this.allQuiz = data
+  getAllVehicule(){
+    this.serviceautoecole.getAllVehicule().subscribe(data =>{
       console.log(data)
+      this.vehicule = data
     });
   }
-
-  //METHODE PERMETANT D'OBTENIR TOUT LE Question
-  getAllQuestion() {
-    console.log("cour ajouter")
-    this.serviceQuiz.getQuestion().subscribe(data =>{
-      this.allquestion = data
+getAllTypeCours(){
+  this.serviceautoecole.getTypeCours().subscribe(data =>{
+    console.log(data)
+    this.typecours = data;
+  });
+  }
+  getAllAdresse(){
+    this.serviceautoecole.getAllAdresse().subscribe(data =>{
       console.log(data)
+      this.adresse = data;
     });
   }
-
-  //METHODE PERMETTANT D'AJOUTER DU CONTENU
-  ajouterQuiz(){
-    this.serviceQuiz.AjouterQuiz(this.titreQuiz,this.descriptionQuiz,this.imageQuizs).subscribe(
-      data =>{
-        if(data.message == 'Ok'){
-          this.popUp();
-          this.getAllQuiz();
-          this.titreQuiz = '';
-          this.descriptionQuiz = '';
-          this.imageQuizs ;
-          
-        }else{
-          
-            Swal.fire({
-              title: ' ERREUR !!',
-              text: data.message,
-              heightAuto: false,
-              showConfirmButton: true,
-              confirmButtonText: "D'accord",
-              confirmButtonColor: '#6200EE',
-              showDenyButton: false,
-              showCancelButton: false,
-              allowOutsideClick: false
-            })
-         
-        }
-      }
-    )
-    
-  }
-//Acutalise une fois cours ajouter 
-aletre(): void {
-  setTimeout(() => {
-    this.getAllQuiz();
-  }, 1000);
-}
-  //METHODE PERMETTANT D'AJOUTER DU QUESTION
-  ajouterQuestion(){
-    console.log("bonjour")
-    this.serviceQuiz.postQuestion(this.question,this.questionQuiz,this.imagequestion).subscribe(
-      data =>{
-        if(data.message == 'Ok'){
-          this.popUpquestion();
-          this.getAllQuestion();
-          this.titreQuiz = '';
-          this.descriptionQuiz = '';
-          this.imageQuizs ;
-          
-        }else{
-          
-            Swal.fire({
-              title: ' ERREUR !!',
-              text: data.message,
-              heightAuto: false,
-              showConfirmButton: true,
-              confirmButtonText: "D'accord",
-              confirmButtonColor: '#6200EE',
-              showDenyButton: false,
-              showCancelButton: false,
-              allowOutsideClick: false
-            })
-         
-        }
-      }
-    )
+  getAllAutoecole(){
+    this.serviceautoecole.getAllAutoEcole().subscribe(data =>{
+      console.log(data)
+      this.autoecole = data;
+    })
   }
 
-  //METHODE PERMETTANT D'AJOUTER DU QUESTION
-  // ajouterReponse(){
-  //   console.log("bonjour")
-  //   this.serviceQuiz.postReponse(this.reponse,this.iscorrest).subscribe(data =>{
-  //     console.log(data);
-  //   })
-  // }
-
+  //PostAutoECOLE
+  postAutoecole(){
+    this.serviceautoecole.postAutoEcole(this.nomAuto,this.rue,this.porte,this.autoVehicule,this.autoCours,this.autoAdresse,this.autoAdmin).subscribe(
+     data =>{
+      if(data.message = "Ok"){
+        this.popUp();
+        this.nomAuto = '';
+        this.rue = '';
+        this.porte = '';
+        this.adresse = '';
+        this.autoAdmin = '';
+        this.autoVehicule = '';
+        this.autoCours = '';
+      }else{
+        Swal.fire({
+          title: 'Alerte !!',
+          text: data.message,
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: "D'accord",
+          confirmButtonColor: '#1A237E',
+          showDenyButton: false,
+          showCancelButton: false,
+          allowOutsideClick: false
+        })
+      }
+     }
+    )
+  }
   //POPUP UTILISER POUR ENREGISTRE UN COURS
   popUp() {
     Swal.fire({
       title: 'Félicitation !!',
-      text: 'Quiz ajouté avec succes',
+      text: 'Auto ajouté avec succes',
       heightAuto: false,
       showConfirmButton: true,
       confirmButtonText: "D'accord",
@@ -221,10 +227,10 @@ aletre(): void {
     })
   }
   //POPUP UTILISER POUR ENREGISTRE UN Question
-  popUpquestion() {
+  popUpAdresse() {
     Swal.fire({
       title: 'Félicitation !!',
-      text: 'Question ajoutée avec succes',
+      text: 'Adresse ajoutée avec succes',
       heightAuto: false,
       showConfirmButton: true,
       confirmButtonText: "D'accord",
@@ -234,6 +240,34 @@ aletre(): void {
       allowOutsideClick: false
     })
   }
+//POPUP UTILISER POUR ENREGISTRE UN Question
+popUpType() {
+  Swal.fire({
+    title: 'Félicitation !!',
+    text: 'Cours ajoutée avec succes',
+    heightAuto: false,
+    showConfirmButton: true,
+    confirmButtonText: "D'accord",
+    confirmButtonColor: '#1A237E',
+    showDenyButton: false,
+    showCancelButton: false,
+    allowOutsideClick: false
+  })
+}
 
+//POPUP UTILISER POUR ENREGISTRE UN Question
+popUpVehicule() {
+  Swal.fire({
+    title: 'Félicitation !!',
+    text: 'Véhicule ajoutée avec succes',
+    heightAuto: false,
+    showConfirmButton: true,
+    confirmButtonText: "D'accord",
+    confirmButtonColor: '#1A237E',
+    showDenyButton: false,
+    showCancelButton: false,
+    allowOutsideClick: false
+  })
+}
 
 }

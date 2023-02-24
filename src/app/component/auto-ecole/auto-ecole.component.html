@@ -30,9 +30,10 @@
                 <table class="table">
                     <thead>
                         <tr class="text-align">
-                            <th scope="col">Image</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Quartier</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -78,7 +79,7 @@
 </div>
 
 
-<!--MODAL POUR L'AJOUT DU Quiz-->
+<!--MODAL POUR L'AJOUT DU AutoEcole-->
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -94,28 +95,52 @@
 
                 <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-6">
-                        <label for="titreCours" class="form-label">Titre *</label>
-                        <input type="text" name="titreQuiz" [(ngModel)]="titreQuiz" class="form-control" id="titre"
+                        <label for="titreCours" class="form-label">Nom Auto-école *</label>
+                        <input type="text" name="nomAuto" [(ngModel)]="nomAuto" class="form-control" id="titre"
                             required>
                         <div class="invalid-feedback">
                             Titre est obligatoire!
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="image" class="form-label">Image *</label>
+                        <label for="titreCours" class="form-label">Porte *</label>
+                        <input type="number" min="1" name="porte" [(ngModel)]="porte" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Le Nom est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="titreCours" class="form-label">Rue *</label>
+                        <input type="number" min="1" name="rue" [(ngModel)]="rue" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Rue est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="titreCours" class="form-label">Téléphone *</label>
+                        <input type="tel" name="telephone" [(ngModel)]="telephone" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            telephone est obligatoire!
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label for="image" class="form-label">Porte *</label>
                         <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
                         <div class="invalid-feedback">
                             Image est requise
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <!-- <div class="col-md-6">
                         <label for="descriptionCours" class="form-label">Description *</label>
                         <textarea class="form-control" name="descriptionQuiz" [(ngModel)]="descriptionQuiz" id="email"
                             required></textarea>
                         <div class="invalid-feedback">
                             Description est requis!
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="col-md-6">
                         <label for="image" class="form-label">Vocal *</label>
                         <input type="file" (change)="uploadVocal($event)" class="form-control" id="image" required>
@@ -125,30 +150,30 @@
                     </div> -->
 
                     <div class="col-md-12 row">
-                        <!-- <label for="validationCustom04" class="form-label">Quiz *</label>
+                        <label for="validationCustom04" class="form-label">Véhicule *</label>
                             <div class="col-md-4">
                                 
-                                <select class="form-select" id="validationCustom04" name="questionQuiz" [(ngModel)]="questionQuiz" required>
+                                <select class="form-select" id="validationCustom04" name="autoVehicule" [(ngModel)]="autoVehicule" required>
                                     <option selected disabled value="">Selectionner une question</option>
-                                    <option *ngFor="let question of allquestion" value="{{question}}"> {{question.question}} </option>
+                                    <option *ngFor="let ve of vehicule" value="{{ve}}"> {{ve.nomvehicule}} </option>
                                     
                                 </select>
 
                                 <div class="invalid-feedback">
-                                    Veillez selectionner un thème
+                                    Veillez selectionner un vehicule
                                 </div>
-                            </div> -->
-                        <!-- <div class="col-md-2">
+                            </div>
+                        <div class="col-md-2">
                                 <button class="btn btnadd" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
                                     <i class="bi add bi-plus-circle-fill"></i>
                                 </button>
-                            </div> -->
+                            </div>
 
                     </div>
 
                     <div class="col-12">
                         <button class="btn btn-outline-primary" type="submit"
-                            (click)="ajouterQuiz()">Enregistrer</button>
+                            (click)="postAutoecole()">Enregistrer</button>
                     </div>
                 </form>
 
