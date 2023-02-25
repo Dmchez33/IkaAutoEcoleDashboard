@@ -32,24 +32,25 @@
                         <tr class="text-align">
                             <th scope="col">Nom</th>
                             <th scope="col">Téléphone</th>
-                            <th scope="col">Ville</th>
+                            <!-- <th scope="col">Ville</th> -->
                             <th scope="col">Quartier</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr class="text-align" *ngFor="let data of allQuiz |filter:recherche">
+                        <tr class="text-align" *ngFor="let data of autoecole |filter:recherche, let j=index">
                             <th scope="row">
-                                <img src={{data.imageName}} alt="imagequiz" class="imageQuiz">
+                                <img src={{data.nom}} alt="imagequiz" class="imageQuiz">
                             </th>
-                            <td> {{data.titre}} </td>
-                            <td> {{data.description | slice:0:20}}.. </td>
+                            <td> {{data.telephone}} </td>
+                            <!-- <td> {{data.adresses[j].ville }} </td> -->
+                            <td> {{data.adresses[j].quartier}} </td>
                             <td>
                                 <div class="row">
                                     <div class="col-sm-2 col-md-4 mb-1">
-                                        <a class="btn" routerLink="detail-cours/{{data.id}}">
+                                        <span class="btn" routerLink="detail-utilisateur">
                                             <i class="bi bi-eye-fill"></i>
-                                        </a>
+                                        </span>
 
                                     </div>
                                     <div class="col-sm-2 col-md-4 mb-1">
@@ -151,23 +152,92 @@
 
                     <div class="col-md-12 row">
                         <label for="validationCustom04" class="form-label">Véhicule *</label>
-                            <div class="col-md-4">
-                                
-                                <select class="form-select" id="validationCustom04" name="autoVehicule" [(ngModel)]="autoVehicule" required>
-                                    <option selected disabled value="">Selectionner une question</option>
-                                    <option *ngFor="let ve of vehicule" value="{{ve}}"> {{ve.nomvehicule}} </option>
-                                    
-                                </select>
+                        <div class="col-md-10">
 
-                                <div class="invalid-feedback">
-                                    Veillez selectionner un vehicule
-                                </div>
+                            <select class="form-select" id="validationCustom04" name="autoVehicule"
+                                [(ngModel)]="autoVehicule" required>
+                                <option selected disabled value="">Selectionner un vehicule</option>
+                                <option *ngFor="let ve of vehicule" value="{{ve.id}}"> {{ve.marquevehicule}} </option>
+
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Veillez selectionner un vehicule
                             </div>
+                        </div>
                         <div class="col-md-2">
-                                <button class="btn btnadd" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                            <button class="btn btnadd" data-bs-target="#Vehicule" data-bs-toggle="modal">
+                                <i class="bi add bi-plus-circle-fill"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Cours dispensé par Auto-école *</label>
+                        <div class="col-md-10">
+
+                            <select class="form-select" id="validationCustom04" name="autoCours" [(ngModel)]="autoCours"
+                                required>
+                                <option selected disabled value="">Selectionner un Cours</option>
+                                <option *ngFor="let ve of typecours" value="{{ve.id}}"> {{ve.nomcours}} </option>
+
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Veillez selectionner un type de cours
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btnadd" data-bs-target="#typeCours" data-bs-toggle="modal">
+                                <i class="bi add bi-plus-circle-fill"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Adresse *</label>
+                        <div class="col-md-10">
+
+                            <select class="form-select" id="validationCustom04" name="autoAdresse"
+                                [(ngModel)]="autoAdresse" required>
+                                <option selected disabled value="">Selectionner une question</option>
+                                <option *ngFor="let ve of adresse" value="{{ve.id}}"> {{ve.quartier}} </option>
+
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Veillez selectionner un Adresse
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btnadd" data-bs-target="#Adresse" data-bs-toggle="modal">
+                                <i class="bi add bi-plus-circle-fill"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 row">
+                        <label for="validationCustom04" class="form-label">Propriétaire d'autoécole *</label>
+                        <div class="col-md-10">
+
+                            <select class="form-select" id="validationCustom04" name="autoAdmin" [(ngModel)]="autoAdmin"
+                                required>
+                                <option selected disabled value="">Selectionner une question</option>
+                                <option *ngFor="let ve of allAdmin" value="{{ve.id}}">{{ve.prenom}} {{ve.nom}} </option>
+
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Veillez selectionner un Adresse
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                                <button class="btn btnadd" data-bs-target="#Adresse" data-bs-toggle="modal">
                                     <i class="bi add bi-plus-circle-fill"></i>
                                 </button>
-                            </div>
+                            </div> -->
 
                     </div>
 
@@ -189,9 +259,8 @@
     </div>
 </div>
 
-<!--- MODAL UTILISER POUR AJOUTER DES QUIZ -->
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
+<!--- MODAL UTILISER POUR AJOUTER DES Vehicule -->
+<div class="modal fade" id="Vehicule" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -201,48 +270,43 @@
             <div class="modal-body">
 
                 <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-md-6">
-                        <label for="libelleCours" class="form-label">Question</label>
-                        <input type="text" name="question" [(ngModel)]="question" class="form-control" id="titre"
+                    <!-- <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Nom du véhicule *</label>
+                        <input type="text" name="nomvehicule" [(ngModel)]="nomvehicule" class="form-control" id="titre"
                             required>
                         <div class="invalid-feedback">
-                            La question est obligatoire!
+                            Nom est obligatoire!
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Marque du véhicule *</label>
+                        <input type="text" name="marquevehicule" [(ngModel)]="marquevehicule" class="form-control"
+                            id="titre" required>
+                        <div class="invalid-feedback">
+                            La Marque est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Type du véhicule *</label>
+                        <input type="text" name="typevehicule" [(ngModel)]="typevehicule" class="form-control"
+                            id="titre" required>
+                        <div class="invalid-feedback">
+                            Le type du véhicule est obligatoire!
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" (change)="uploadImageQuestion($event)" class="form-control" id="image"
-                            required>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
                         <div class="invalid-feedback">
                             Image est requise
                         </div>
                     </div>
-                    <div class="col-md-12 row">
-                        <label for="validationCustom04" class="form-label">Quiz *</label>
 
-                        <div class="col-md-6">
-                            <select class="form-select" id="validationCustom04" name="questionQuiz"
-                                [(ngModel)]="questionQuiz" required>
-                                <option selected disabled value="">Selectionner un quiz</option>
-                                <option *ngFor="let quiz of allQuiz" value="{{quiz.id}}"> {{quiz.titre}} </option>
-
-                            </select>
-
-                            <div class="invalid-feedback">
-                                Veillez selectionner un quiz
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btnadd" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
-                                <i class="bi add bi-plus-circle-fill"></i>
-                            </button>
-                        </div>
-                    </div>
 
 
                     <div class="col-12">
-                        <button class="btn btn-outline-primary" type="submit"
-                            (click)="ajouterQuestion()">Enregistrer</button>
+                        <button (click)="postVehicule()" class="btn btn-outline-primary"
+                            type="submit">Enregistrer</button>
                     </div>
                 </form>
 
@@ -255,7 +319,155 @@
     </div>
 </div>
 
+<!--- MODAL UTILISER POUR AJOUTER DES TYPE DE COURS -->
+<div class="modal fade" id="typeCours" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"> Enregistrement </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
+                <form class="row g-3 needs-validation" novalidate>
+                    <!-- <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Nom du véhicule *</label>
+                        <input type="text" name="nomvehicule" [(ngModel)]="nomvehicule" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Nom est obligatoire!
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Nom du cours *</label>
+                        <input type="text" name="nomcours" [(ngModel)]="nomcours" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Le nom du cours est obligatoire!
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Quartier *</label>
+                        <input type="text" name="quartier" [(ngModel)]="quartier" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Le quartier est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Longitude *</label>
+                        <input type="text" name="long" [(ngModel)]="long" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            La longitude est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Latitude *</label>
+                        <input type="text" name="lat" [(ngModel)]="lat" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            La latitude est obligatoire!
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Image *</label>
+                        <input type="file" (change)="uploadImageQuestion($event)" class="form-control" id="image"
+                            required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <button (click)="postTypeCours()" class="btn btn-outline-primary"
+                            type="submit">Enregistrer</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                    data-bs-toggle="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--- MODAL UTILISER POUR AJOUTER DES Vehicule -->
+<div class="modal fade" id="Adresse" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"> Enregistrement </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <!-- <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Nom du véhicule *</label>
+                        <input type="text" name="nomvehicule" [(ngModel)]="nomvehicule" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Nom est obligatoire!
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Ville *</label>
+                        <input type="text" name="ville" [(ngModel)]="ville" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            La Ville est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Quartier *</label>
+                        <input type="text" name="quartier" [(ngModel)]="quartier" class="form-control" id="titre"
+                            required>
+                        <div class="invalid-feedback">
+                            Le quartier est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Longitude *</label>
+                        <input type="text" name="long" [(ngModel)]="long" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            La longitude est obligatoire!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="libelleCours" class="form-label">Latitude *</label>
+                        <input type="text" name="lat" [(ngModel)]="lat" class="form-control" id="titre" required>
+                        <div class="invalid-feedback">
+                            La latitude est obligatoire!
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image"
+                            required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div> -->
+
+
+
+                    <div class="col-12">
+                        <button (click)="postAdresse()" class="btn btn-outline-primary"
+                            type="submit">Enregistrer</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                    data-bs-toggle="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

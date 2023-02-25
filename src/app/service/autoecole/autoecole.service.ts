@@ -12,13 +12,13 @@ export class AutoecoleService {
 
   //GET ALL AUTOECOLE
   getAllAutoEcole():Observable<any>{
-    return this.http.get(HTTP_AUTOECOLE+`getAll`);
+    return this.http.get(HTTP_AUTOECOLE+`/getAll`);
   }
 
   //GET AUTOECOLE PAR ID
 
   //POST AUTOECOLE
-  postAutoEcole(nom:any,rue:any,porte:any,vehicule:any,typeCours:any,adresse:any,admin:any):Observable<any>{
+  postAutoEcole(telephone:any, nom:any,rue:any,porte:any,vehicule:any,typeCours:any,adresse:any,admin:any):Observable<any>{
     let data = new FormData();
     let auto = {
     
@@ -27,21 +27,22 @@ export class AutoecoleService {
       
       "porte":porte,
       "rue":rue,
+      "telephone":telephone,
       "adresses": [
           
           {
-            "id":adresse.id
+            "id":adresse
           }
 
           ],
       "vehicules": [
           {
-            "id":vehicule.id
+            "id":vehicule
           }
           ],
       "typeCours": [
           {
-            "id":typeCours.id
+            "id":typeCours
           }
       ]
       
@@ -66,12 +67,12 @@ export class AutoecoleService {
     return this.http.get(`http://localhost:8080/api/AutoEcole/getallAdresse`)
   }
   //postVehicule
-  postVehicule(nom:any,typevehicule:any,marque:any,image:any):Observable<any>{
+  postVehicule(typevehicule:any,marque:any,image:any):Observable<any>{
     let data = new FormData()
     let vehicule = [
       {
        
-        "nomvehicule": nom,
+        
         "typevehicule": typevehicule,
         "marquevehicule": marque
             
@@ -95,9 +96,9 @@ export class AutoecoleService {
         "nomcours": nomcours
        }
     ]
-    data.append('typeImage',imageCours);
+    data.append('image',imageCours);
     data.append('typeCours',JSON.stringify(typeCours).slice(1, JSON.stringify(typeCours).lastIndexOf(']')))
-    return this.http.post(`http://localhost:8080/api/AutoEcole/addtypecours`,data);
+    return this.http.post(`http://localhost:8080/api/AutoEcole/ajouterTypecours`,data); 
   }
 
   getTypeCours():Observable<any>{

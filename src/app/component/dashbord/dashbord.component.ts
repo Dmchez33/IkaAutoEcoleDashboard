@@ -8,6 +8,7 @@ import * as Leaflet from 'leaflet';
 import { CoursService } from 'src/app/service/cours/cours.service';
 import { QuizService } from 'src/app/service/quiz/quiz.service';
 import { UtilisateurService } from 'src/app/service/utilisateur/utilisateur.service';
+import { AutoecoleService } from 'src/app/service/autoecole/autoecole.service';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
 
@@ -24,9 +25,15 @@ export class DashbordComponent implements OnInit {
   allAdmin: any;
   allApprenant: any;
   allUserConnected:any;
-  constructor(private serviceUtilisateur: UtilisateurService,private serviceCours: CoursService,private serviceQuiz: QuizService) { }
+  autoecole:any;
+  constructor(private serviceautoecole: AutoecoleService,private serviceUtilisateur: UtilisateurService,private serviceCours: CoursService,private serviceQuiz: QuizService) { }
 
   ngOnInit(): void {
+    this.serviceautoecole.getAllAutoEcole().subscribe(data =>{
+      console.log(data)
+      this.autoecole = data;
+    })
+
     this.serviceCours.listeAllCours().subscribe(data => {
       this.allCoursLength = data.length
       console.log(data.length)
@@ -61,41 +68,41 @@ export class DashbordComponent implements OnInit {
 
   }
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  // @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {
-        min: 0,
-        max: 200
-      }
-    },
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom'
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end'
-      }
-    }
-  };
-  public barChartType: ChartType = 'bar';
-  public barChartPlugins = [
-    DataLabelsPlugin
-  ];
+  // public barChartOptions: ChartConfiguration['options'] = {
+  //   responsive: true,
+  //   // We use these empty structures as placeholders for dynamic theming.
+  //   scales: {
+  //     x: {},
+  //     y: {
+  //       min: 0,
+  //       max: 200
+  //     }
+  //   },
+  //   plugins: {
+  //     legend: {
+  //       display: true,
+  //       position: 'bottom'
+  //     },
+  //     datalabels: {
+  //       anchor: 'end',
+  //       align: 'end'
+  //     }
+  //   }
+  // };
+  // public barChartType: ChartType = 'bar';
+  // public barChartPlugins = [
+  //   DataLabelsPlugin
+  // ];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: ['Nombre de d\'auto-écoles', 'Nombre de d\'utilisateurs', 'Nombre de de quiz'],
-    datasets: [
-      { data: [ 55, 100, 5], label: 'Graphe montrant les statistiques', backgroundColor: '#1A237E',borderColor: '#1A237E', },
-      // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    ]
-  };
+  // public barChartData: ChartData<'bar'> = {
+  //   labels: ['Nombre de d\'auto-écoles', 'Nombre de d\'utilisateurs', 'Nombre de de quiz'],
+  //   datasets: [
+  //     { data: [ 55, 100, 5], label: 'Graphe montrant les statistiques', backgroundColor: '#1A237E',borderColor: '#1A237E', },
+  //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  //   ]
+  // };
 
   // events
   // public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
@@ -121,42 +128,42 @@ export class DashbordComponent implements OnInit {
   // }
 
 
-  @ViewChild(BaseChartDirective) Chart: BaseChartDirective | undefined;
+  // @ViewChild(BaseChartDirective) Chart: BaseChartDirective | undefined;
 
-  // Pie
-  public pieChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-      },
-      datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
-      },
-    }
-  };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ],
-    datasets: [ {
-      data: [ 300, 500, 100 ]
-    } ]
-  };
-  public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [ DataLabelsPlugin ];
+  // // Pie
+  // public pieChartOptions: ChartConfiguration['options'] = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       display: true,
+  //       position: 'bottom',
+  //     },
+  //     datalabels: {
+  //       formatter: (value, ctx) => {
+  //         if (ctx.chart.data.labels) {
+  //           return ctx.chart.data.labels[ctx.dataIndex];
+  //         }
+  //       },
+  //     },
+  //   }
+  // };
+  // public pieChartData: ChartData<'pie', number[], string | string[]> = {
+  //   labels: [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ],
+  //   datasets: [ {
+  //     data: [ 300, 500, 100 ]
+  //   } ]
+  // };
+  // public pieChartType: ChartType = 'pie';
+  // public pieChartPlugins = [ DataLabelsPlugin ];
 
-  // events
-  public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
+  // // events
+  // public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
+  //   console.log(event, active);
+  // }
 
-  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
+  // public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
+  //   console.log(event, active);
+  // }
 
 
 
@@ -181,14 +188,7 @@ export class DashbordComponent implements OnInit {
         position: { lat: 28.625485, lng: 79.821091 },
         draggable: true
       },
-      {
-        position: { lat: 28.625293, lng: 79.817926 },
-        draggable: false
-      },
-      {
-        position: { lat: 28.625182, lng: 79.81464 },
-        draggable: true
-      }
+      
     ];
     for (let index = 0; index < initialMarkers.length; index++) {
       const data = initialMarkers[index];

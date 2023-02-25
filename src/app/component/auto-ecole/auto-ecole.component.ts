@@ -185,7 +185,17 @@ getAllTypeCours(){
 
   //PostAutoECOLE
   postAutoecole(){
-    this.serviceautoecole.postAutoEcole(this.nomAuto,this.rue,this.porte,this.autoVehicule,this.autoCours,this.autoAdresse,this.autoAdmin).subscribe(
+    console.log(
+      this.autoAdresse
+    )
+    console.log(
+      this.autoCours
+    )
+    console.log(
+      this.autoAdmin
+    )
+    
+    this.serviceautoecole.postAutoEcole(this.telephone,this.nomAuto,this.rue,this.porte,this.autoVehicule,this.autoCours,this.autoAdresse,this.autoAdmin).subscribe(
      data =>{
       if(data.message = "Ok"){
         this.popUp();
@@ -210,6 +220,81 @@ getAllTypeCours(){
         })
       }
      }
+    )
+  }
+
+  //METHODE PERMETTANT DE POSTER UNE ADRESSE
+  postAdresse(){
+    this.serviceautoecole.postAdresse(this.ville,this.quartier,this.long,this.lat).subscribe(
+      data =>{
+        if(data.message == 'Ok'){
+          this.popUpAdresse();
+          this.ville = '';
+          this.quartier = '';
+          this.long = '';
+          this.lat = '';
+        }else{
+          Swal.fire({
+            title: 'Alerte !!',
+            text: data.message,
+            heightAuto: false,
+            showConfirmButton: true,
+            confirmButtonText: "D'accord",
+            confirmButtonColor: '#1A237E',
+            showDenyButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false
+          })
+        }
+      }
+    )
+  }
+  //METHODE POST VEHICULE
+  postVehicule(){
+    this.serviceautoecole.postVehicule(this.typevehicule,this.marquevehicule,this.imageVehicule).subscribe(
+      data =>{
+        if(data.message == 'Ok'){
+          this.popUpVehicule();
+          //this.nomvehicule = '';
+          this.typevehicule = '';
+          this.marquevehicule = '';
+        }else{
+          Swal.fire({
+            title: 'Alerte !!',
+            text: data.message,
+            heightAuto: false,
+            showConfirmButton: true,
+            confirmButtonText: "D'accord",
+            confirmButtonColor: '#1A237E',
+            showDenyButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false
+          })
+        }
+      }
+    )
+  }
+  //METHODE PERMETTANT DE POSTER UN TYPE DE COURS
+  postTypeCours(){
+    this.serviceautoecole.postTypeCours(this.nomcours,this.imagecours).subscribe(
+      data =>{
+        if(data.message == 'Ok'){
+          this.popUpType();
+          this.nomcours = '';
+        }else{
+          Swal.fire({
+            title: 'Alerte !!',
+            text: data.message,
+            heightAuto: false,
+            showConfirmButton: true,
+            confirmButtonText: "D'accord",
+            confirmButtonColor: '#1A237E',
+            showDenyButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false
+          })
+        }
+      }
     )
   }
   //POPUP UTILISER POUR ENREGISTRE UN COURS
