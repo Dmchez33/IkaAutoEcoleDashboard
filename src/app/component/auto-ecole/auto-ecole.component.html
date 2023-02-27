@@ -39,12 +39,12 @@
                     </thead>
                     <tbody class="table-group-divider">
                         <tr class="text-align" *ngFor="let data of autoecole |filter:recherche, let j=index">
-                            <th scope="row">
-                                <img src={{data.nom}} alt="imagequiz" class="imageQuiz">
-                            </th>
+                            <td>
+                                {{data.nom}}
+                            </td>
                             <td> {{data.telephone}} </td>
                             <!-- <td> {{data.adresses[j].ville }} </td> -->
-                            <td> {{data.adresses[j].quartier}} </td>
+                            <td> {{data.adresses[0].quartier}} </td>
                             <td>
                                 <div class="row">
                                     <div class="col-sm-2 col-md-4 mb-1">
