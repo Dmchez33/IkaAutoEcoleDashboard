@@ -50,6 +50,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { QuestionComponent } from './component/question/question.component';
 import { AuthIntercept } from './httpIntercept/auth.intercept';
 import { DetailPanneauxComponent } from './component/detail-panneaux/detail-panneaux.component';
+import { VideosComponent } from './component/videos/videos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { DetailPanneauxComponent } from './component/detail-panneaux/detail-pann
     DetailCoursComponent,
     QuestionComponent,
     DetailPanneauxComponent,
+    VideosComponent,
     
   ],
   imports: [

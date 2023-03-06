@@ -45,7 +45,7 @@ export class DashbordComponent implements OnInit {
         const ville = autoecole.adresses[0].ville;
         const quartier = autoecole.adresses[0].quartier;
         const nomAutoecole = autoecole.nom
-        this.addMarker(lng,lat,ville,quartier,nomAutoecole);
+        this.addMarker(lat,lng,ville,quartier,nomAutoecole);
       }
       const group = L.featureGroup(this.markers).addTo(this.map);
       this.map.fitBounds(group.getBounds());

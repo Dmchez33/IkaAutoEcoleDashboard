@@ -129,7 +129,7 @@ export class CoursComponent implements OnInit {
 
   uploadImage(event: any) {
     if (event.target.files.length > 0) {
-       this.imageCours = event.target.files[0];
+       this.descriptionCours = event.target.files[0];
       // do something with the file
     }
 
@@ -174,7 +174,7 @@ uploadImageContenu(event: any) {
 
   //METHODE PERMETTANT D'AJOUTER DU CONTENU
   ajouterContenu(){
-    this.serviceCours.ajouterContenuCours(this.titreCours,this.descriptionCours,this.idCours, this.imageContenu, this.vocalContenu).subscribe(
+    this.serviceCours.ajouterContenuCours(this.titreCours,this.descriptionCours, this.imageContenu, this.vocalContenu).subscribe(
       data =>{
         if(data.message == 'Ok'){
           this.popUp();
@@ -282,7 +282,8 @@ aletre(): void {
         if(data.message == 'Ok'){
           
           this.popUpPanneaux();
-          this.getAllTypePanneaux();
+          this.getAllPanneaux();
+          
           this.nomPanneaux = '';
           this.descriptionPanneaux = '';
         }else{

@@ -47,18 +47,18 @@ export class CoursService {
   }
   //UPDATE CONTENU COURS
   //POST CONTENU COURS
-  ajouterContenuCours(titre:string,description:string, courId:number, image:File,audio:File):Observable<any>{
+  ajouterContenuCours(titre:string,description:string,  image:File,audio:File):Observable<any>{
     let data = new FormData()
 
     let contenu = [{
      
       "titre": titre,
-      "description": description,
-      "cours": {
-          "id": courId
-      }
+      //"description": description,
+      // "cours": {
+      //     "id": courId
+      // }
   }]
-
+  data.append('description',description);
     data.append('file',image);
     data.append('audio',audio);
     data.append('contenu', JSON.stringify(contenu).slice(1, JSON.stringify(contenu).lastIndexOf(']')))

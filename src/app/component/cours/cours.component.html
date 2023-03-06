@@ -47,7 +47,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Thème</th>
+                                    <!-- <th scope="col">Thème</th> -->
                                     <th scope="col">Titre</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Action</th>
@@ -55,9 +55,9 @@
                             </thead>
                             <tbody class="table-group-divider">
                                 <tr *ngFor="let data of contenuCours |filter:recherche">
-                                    <th scope="row"> {{data.cours.libelle}} </th>
+                                    <!-- <th scope="row"> {{data.cours.libelle}} </th> -->
                                     <td> {{data.titre}} </td>
-                                    <td> {{data.description | slice:0:50}}.. </td>
+                                    <td> <img src={{data.image}} alt="" srcset=""></td>
                                     <td>
                                         <div class="row">
                                             <div class="col-sm-2 col-md-4 mb-1">
@@ -211,12 +211,19 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <label for="image" class="form-label">Description *</label>
+                        <input type="file" (change)="uploadImage($event)" class="form-control" id="image" required>
+                        <div class="invalid-feedback">
+                            Image est requise
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
                         <label for="descriptionCours" class="form-label">Description *</label>
                         <textarea class="form-control" name="descriptionCours" [(ngModel)]="descriptionCours" id="email" required></textarea>
                         <div class="invalid-feedback">
                             Description est requis!
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <label for="image" class="form-label">Vocal *</label>
                         <input type="file" (change)="uploadVocal($event)" class="form-control" id="image" required>
@@ -225,12 +232,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 row">
+                    <!-- <div class="col-md-12 row">
                         <label for="validationCustom04" class="form-label">Thème Cours *</label>
                             <div class="col-md-4">
                                 
                                 <select class="form-select" id="validationCustom04" name="idCours" [(ngModel)]="idCours" required>
-                                    <!-- <option selected disabled value="">Selectionner un cours</option> -->
+                                    <option selected disabled value="">Selectionner un cours</option> 
                                     <option *ngFor="let cour of allCours" value="{{cour.id}}"> {{cour.libelle}} </option>
                                     
                                 </select>
@@ -244,7 +251,7 @@
                                 </button>
                             </div>
                         
-                    </div>
+                    </div> -->
 
                     <div class="col-12">
                         <button class="btn btn-outline-primary" type="submit" (click)="ajouterContenu()">Enregistrer</button>
