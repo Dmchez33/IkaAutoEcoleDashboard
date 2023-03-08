@@ -1,1 +1,18 @@
 <p>videos works!</p>
+<div class="row">
+    <youtube-player
+    class="class"
+      [videoId]="id"
+      (ready)="savePlayer($event)"
+      (change)="onStateChange($event)"
+    ></youtube-player>
+</div>
+<div class="video-list">
+    <div class="video" *ngFor="let video of videos" (click)="loadVideo(video.id)">
+      <img [src]="'https://img.youtube.com/vi/' + video.id + '/mqdefault.jpg'" alt="{{video.title}}">
+      <h3>{{video.title}}</h3>
+    </div>
+  </div>
+  <div class="video-player">
+    <youtube-player (ready)="onPlayerReady($event)" (stateChange)="onStateChange($event)" [videoId]="currentVideoId"></youtube-player>
+  </div>

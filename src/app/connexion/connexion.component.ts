@@ -40,9 +40,15 @@ export class ConnexionComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
         // this.reloadPage();
-        this.router.navigate(['/side-bar/dashboard'])
+        if(this.roles[0] == 'ROLE_ADMIN_AUTOECOLE')
+        {
+          this.router.navigate(['/dashboar-admin'])
+        }else{
+          this.router.navigate(['/side-bar/dashboard'])
+        }
+        
 
-        console.log(data)
+        console.log(this.roles[0]);
       },
       error: err => {
         this.errorMessage = err.error.message;

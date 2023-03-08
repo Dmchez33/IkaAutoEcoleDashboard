@@ -31,6 +31,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import {
   AvatarModule,
   BadgeModule,
@@ -51,6 +52,7 @@ import { QuestionComponent } from './component/question/question.component';
 import { AuthIntercept } from './httpIntercept/auth.intercept';
 import { DetailPanneauxComponent } from './component/detail-panneaux/detail-panneaux.component';
 import { VideosComponent } from './component/videos/videos.component';
+import { DashboardAdminAutoEcoleComponent } from './component/dashboard-admin-auto-ecole/dashboard-admin-auto-ecole.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +70,7 @@ import { VideosComponent } from './component/videos/videos.component';
     QuestionComponent,
     DetailPanneauxComponent,
     VideosComponent,
+    DashboardAdminAutoEcoleComponent,
     
   ],
   imports: [
@@ -104,6 +107,7 @@ import { VideosComponent } from './component/videos/videos.component';
     TabsModule,
     DropdownModule,
     HeaderModule,
+    NgxYoutubePlayerModule,
     NgMultiSelectDropDownModule
   ], 
   providers: [ { provide: MatPaginatorIntl, useClass: paginationPersonnalise}, AuthIntercept],

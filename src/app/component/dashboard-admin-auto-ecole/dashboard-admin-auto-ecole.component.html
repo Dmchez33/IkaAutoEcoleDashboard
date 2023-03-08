@@ -1,0 +1,155 @@
+<div class="menu  w-100 sticky-top">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <!-- <button class="navbar-brand" (click)="toggleSidebar()">
+      
+            Bootstrap
+          </button> -->
+            <h1 class="navbar-brand"> <img src="../assets/logo/logo.png" width="50" class="logo"
+                    alt="logo de l'application">
+                {{ this.title }}</h1>
+
+            <div class="ms-auto">
+                <div class="row">
+                    <!-- <div class="col position-relative mr-5">
+  
+              <button type="button "
+                class="btn  position-relative position-absolute top-50 start-0 translate-middle badge rounded-pill">
+                <i class="bi bi-bell" style="color: black;"></i>
+                <span class="position-absolute top-50 start-75 translate-middle badge rounded-pill bg-danger">
+                  99+
+  
+                </span>
+              </button>
+            </div> -->
+                    <div class="col">
+                        <div class="btn-group dropstart">
+                            <a href="#"
+                                class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="../assets/image/login_image.gif" alt="hugenerd" width="30" height="30"
+                                    class=" border border-black rounded-circle">
+                                <span class="d-none d-sm-inline mx-1">{{username}}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <!-- <hr class="dropdown-divider"> -->
+                                </li>
+                                <li><a class="dropdown-item" (click)="logout()">Deconnexion</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </nav>
+</div>
+<div class="row w-100 mb-3">
+    <div class="col-md-4">
+        <div class="card m-1 mt-4 w-100">
+            <div class=" d-flex justify-content-center">
+                <img class="imag" src="../../../assets/logo/cours_conduite.png" alt="" srcset="">
+            </div>
+            <div class="contenu">
+                Nombre de cours Ouverts
+                <br>
+                <span>
+                    {{allCoursLength}}
+                </span>
+
+            </div>
+        </div>
+
+        <div class="card m-1 mt-4 w-100">
+
+            <div class="d-flex justify-content-center">
+                <img class="imag" src="../../../assets/logo/quiz1.png" alt="" srcset="">
+            </div>
+            <div class="contenu">
+                Nombre de quiz
+                <br>
+                <span>
+                    {{allQuizLength}}
+                </span>
+
+            </div>
+        </div>
+
+        <div class="card m-1 mt-4 w-100">
+            <div class=" d-flex justify-content-center">
+                <img class="imag" src="../../../assets/logo/users.png" alt="" srcset="">
+            </div>
+            <div class="contenu">
+                Nombre d'utilisateur
+                <br>
+                <span>
+                    {{allApprenant + allAdmin}}
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8">
+        <div id="map" class="map-container m-2"></div>
+    </div>
+
+    <!-- <div class="col-md-8"><div class="map-container m-2" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
+        >
+      </div> 
+      
+    </div> -->
+</div>
+
+<div class="row w-100 mt-1 ">
+
+    <div class="col-md-12">
+
+        <div class="mat-elevation-z m-2">
+            <h5>
+                La listes des apprenants connectés
+            </h5>
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Username</th>
+                        <th scope="col">Telephone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+
+                    <tr *ngFor="let user of allUserConnected">
+
+                        <td> {{user.username}} </td>
+                        <td> {{user.telephone}} </td>
+                        <td> {{user.email}} </td>
+                        <td>
+                            <div class="row">
+
+                                <div class="col-sm-2 col-md-4 mb-1">
+                                    <span class="btn">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 col-md-4">
+                                    <span class="btn">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

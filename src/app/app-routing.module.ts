@@ -1,3 +1,5 @@
+import { DashboardAdminAutoEcoleComponent } from './component/dashboard-admin-auto-ecole/dashboard-admin-auto-ecole.component';
+import { VideosComponent } from './component/videos/videos.component';
 import { AuthGuard } from './guard/auth.guard';
 import { SideBarComponent } from './component/side-bar/side-bar.component';
 import { DetailUtilisateurComponent } from './component/detail-utilisateur/detail-utilisateur.component';
@@ -42,6 +44,12 @@ const routes: Routes = [
   // ,
   {
     path:'connexion', component:ConnexionComponent
+  },
+  {
+    path:'dashboar-admin', component:DashboardAdminAutoEcoleComponent
+  },
+  {
+    path:'video', component:VideosComponent
   },
   // {
   //   path:'side-bar/utilisateur/detail-utilisateur', component:DetailUtilisateurComponent

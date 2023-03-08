@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+
 import * as Leaflet from 'leaflet'; 
 import { CoursService } from 'src/app/service/cours/cours.service';
 import { QuizService } from 'src/app/service/quiz/quiz.service';
 import { UtilisateurService } from 'src/app/service/utilisateur/utilisateur.service';
 import { AutoecoleService } from 'src/app/service/autoecole/autoecole.service';
 import * as L from 'leaflet';
+import { StorageService } from 'src/app/service/storage/storage.service';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
-
 @Component({
-  selector: 'app-dashbord',
-  templateUrl: './dashbord.component.html',
-  styleUrls: ['./dashbord.component.css']
+  selector: 'app-dashboard-admin-auto-ecole',
+  templateUrl: './dashboard-admin-auto-ecole.component.html',
+  styleUrls: ['./dashboard-admin-auto-ecole.component.css']
 })
-export class DashbordComponent implements OnInit {
-  title = "Dashboard"
+export class DashboardAdminAutoEcoleComponent {
+  title = "Tableau de board"
   allCoursLength:any;
   allQuizLength:any;
   nombre:any;
@@ -26,13 +29,39 @@ export class DashbordComponent implements OnInit {
   map!: L.Map;
   markers: L.Marker[] = [];
   markerGroup!: L.LayerGroup;
+  roles: string[] = [];
+  id:any
 
-  constructor(private autoecoleService: AutoecoleService,private serviceUtilisateur: UtilisateurService,private serviceCours: CoursService,private serviceQuiz: QuizService) { }
+  //ATTRIBUTS UTILISES POUR LE MENUBAR
+ 
+  @Input() sidebarId: boolean = true;
+  
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+  drawer: any;
+  static showSidebar: any = true;
+  constructor(private tokenStorageService: StorageService, private router: Router,private storageService: StorageService,private autoecoleService: AutoecoleService,private serviceUtilisateur: UtilisateurService,private serviceCours: CoursService,private serviceQuiz: QuizService) { }
 
   ngOnInit(): void {
-    
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
+  
+
+ 
+    this.id = this.storageService.getUser();
     this.initMap();
-    this.autoecoleService.getAllAutoEcole().subscribe(autoecoles => {
+    this.autoecoleService.getAllAutoEcoleByAdmin(this.id.id).subscribe(autoecoles => {
       for (let i = 0; i < autoecoles.length; i++) {
         const autoecole = autoecoles[i];
         const lat = Number(autoecole.adresses[0].latitude);
@@ -98,6 +127,11 @@ export class DashbordComponent implements OnInit {
     const marker = L.marker([lat, lng]).addTo(this.map).bindPopup(`<b>Ville: ${ville}</b> <div>Quartier: ${quartier} </div> <div>Auto-école: ${nom} </div>`);;
   this.markers.push(marker);
   }
-  
 
+  logout(): void {
+    this.tokenStorageService.signOut();
+    this.router.navigate(['./connexion']);
+     //window.location.reload();
+  }
+  
 }

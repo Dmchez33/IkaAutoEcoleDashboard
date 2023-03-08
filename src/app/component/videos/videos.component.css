@@ -1,0 +1,23 @@
+.class{
+    width: 500px!important;
+}
+
+.video-list {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 10px;
+  }
+  
+  .video {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    scroll-snap-align: center;
+    cursor: pointer;
+  }
+  
+  .video img {
+    width: 200px;
+    height: 120px;
+  }

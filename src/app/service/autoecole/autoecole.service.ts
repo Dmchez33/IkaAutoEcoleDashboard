@@ -16,7 +16,9 @@ export class AutoecoleService {
   }
 
   //GET AUTOECOLE PAR ID
-
+  getAllAutoEcoleByAdmin(id:any):Observable<any>{
+    return this.http.get(HTTP_AUTOECOLE+`/getAutoByAdmin/${id}`);
+  }
   //POST AUTOECOLE
   postAutoEcole(telephone:any, nom:any,rue:any,porte:any,vehicule:any,typeCours:any,adresse:any,admin:any):Observable<any>{
     let data = new FormData();
@@ -72,7 +74,6 @@ export class AutoecoleService {
     let vehicule = [
       {
        
-        
         "typevehicule": typevehicule,
         "marquevehicule": marque
             
